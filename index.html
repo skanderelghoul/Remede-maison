@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bio-Boussole 🧭 | Bio-Master Tool</title>
+    <style>
+        :root {
+            --primary: #2e7d32;
+            --primary-light: #e8f5e9;
+            --accent: #ff9800;
+            --danger: #d32f2f;
+            --text: #333;
+        }
+        body { 
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
+            background: var(--primary-light); 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh; 
+            margin: 0; 
+            color: var(--text);
+        }
+        .card { 
+            background: white; 
+            padding: 30px; 
+            border-radius: 20px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1); 
+            text-align: center; 
+            max-width: 450px; 
+            width: 90%; 
+            border-top: 8px solid var(--primary);
+        }
+        h1 { color: var(--primary); margin-bottom: 10px; font-size: 1.8em; }
+        .tagline { font-size: 0.9em; color: #666; margin-bottom: 25px; font-style: italic; }
+        p { line-height: 1.6; font-size: 1.05em; }
+        .btn-container { display: flex; flex-direction: column; gap: 12px; margin-top: 25px; }
+        button { 
+            background: var(--primary); 
+            color: white; 
+            border: none; 
+            padding: 14px; 
+            border-radius: 10px; 
+            cursor: pointer; 
+            font-size: 1em; 
+            font-weight: 600;
+            transition: all 0.2s ease; 
+        }
+        button:hover { background: #1b5e20; transform: translateY(-2px); }
+        .alert-btn { background: var(--danger); }
+        .alert-btn:hover { background: #b71c1c; }
+        .solution-box { 
+            background: #fff8e1; 
+            padding: 20px; 
+            border-left: 6px solid var(--accent); 
+            text-align: left; 
+            margin-top: 20px; 
+            border-radius: 8px; 
+        }
+        .vigilance { 
+            font-size: 0.8em; 
+            color: #d32f2f; 
+            background: #ffebee;
+            padding: 8px;
+            margin-top: 15px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        .footer { margin-top: 25px; font-size: 0.75em; color: #999; }
+    </style>
+</head>
+<body>
+
+<div class="card" id="app">
+    <h1>Bio-Boussole 🧭</h1>
+    <div class="tagline">L'outil de navigation pour Bio-Masters</div>
+    
+    <div id="screen">
+        <p><strong>🚨 ÉTAPE 1 : SÉCURITÉ</strong><br><br>Ressentez-vous une difficulté à respirer, une confusion ou une douleur brutale ?</p>
+        <div class="btn-container">
+            <button class="alert-btn" onclick="urgency()">OUI 🚨</button>
+            <button onclick="step2()">NON ✅</button>
+        </div>
+    </div>
+
+    <div class="footer">Propulsé par la logique Bio-Master • 2026</div>
+</div>
+
+<script>
+    const screen = document.getElementById('screen');
+
+    function urgency() {
+        screen.innerHTML = `
+            <p style="color: var(--danger); font-weight: bold; font-size: 1.2em;">URGENCE VITALE 🛑</p>
+            <p>Ne tentez aucune approche naturelle. Appelez immédiatement les secours.</p>
+            <button class="alert-btn" style="width:100%" onclick="location.reload()">RETOUR 📞 112</button>
+        `;
+    }
+
+    function step2() {
+        screen.innerHTML = `
+            <p><strong>📍 ÉTAPE 2 : ZONE</strong><br>Où se situe l'inconfort ?</p>
+            <div class="btn-container">
+                <button onclick="digestion()">Digestion 🍏</button>
+                <button onclick="stress()">Stress & Sommeil 🌙</button>
+                <button onclick="peau()">Peau & Blessures ✨</button>
+                <button style="background:#666" onclick="location.reload()">Réinitialiser</button>
+            </div>
+        `;
+    }
+
+    // --- MODULE DIGESTION ---
+    function digestion() {
+        screen.innerHTML = `
+            <p><strong>🔍 PRÉCISION</strong><br>Quel est le symptôme ?</p>
+            <div class="btn-container">
+                <button onclick="render('Menthe Poivrée', 'Calme les spasmes et évacue les gaz.', '1 infusion après le repas.')">Gaz ou Spasmes 💨</button>
+                <button onclick="render('Gingembre', 'Active les enzymes digestives.', 'Frais ou poudre avant le repas.')">Lenteur / Lourdes 🐢</button>
+                <button onclick="step2()">Retour</button>
+            </div>
+        `;
+    }
+
+    // --- MODULE STRESS ---
+    function stress() {
+        screen.innerHTML = `
+            <p><strong>🔍 PRÉCISION</strong><br>Comment se manifeste-t-11 ?</p>
+            <div class="btn-container">
+                <button onclick="render('Aubépine', 'Régule le rythme cardiaque et apaise l\\'oppression.', 'En gélules ou infusion le jour.')">Palpitations / Oppression 💓</button>
+                <button onclick="render('Valériane', 'Facilite le décrochage mental.', '30 min avant le coucher.')">Difficulté d\\'endormissement 😴</button>
+                <button onclick="step2()">Retour</button>
+            </div>
+        `;
+    }
+
+    // --- MODULE PEAU ---
+    function peau() {
+        screen.innerHTML = `
+            <p><strong>🔍 PRÉCISION</strong><br>État de la zone ?</p>
+            <div class="btn-container">
+                <button onclick="render('Aloe Vera', 'Hydrate et refroidit instantanément.', 'Appliquer généreusement le gel.')">Rougeur / Brûlure simple 🔥</button>
+                <button onclick="urgencyMed()">Présence de cloches / bulles ⚠️</button>
+                <button onclick="step2()">Retour</button>
+            </div>
+        `;
+    }
+
+    function urgencyMed() {
+        screen.innerHTML = `
+            <p style="color: var(--danger); font-weight: bold;">AVIS MÉDICAL REQUIS 🏥</p>
+            <p>La présence de cloches indique une brûlure profonde. Consultez un médecin ou un pharmacien.</p>
+            <button onclick="step2()" style="width:100%">Retour</button>
+        `;
+    }
+
+    function render(plante, action, conseil) {
+        screen.innerHTML = `
+            <div class="solution-box">
+                <strong style="font-size: 1.2em; color: var(--primary);">🌱 ${plante}</strong><br>
+                <p style="margin: 10px 0;"><strong>Action :</strong> ${action}</p>
+                <p style="margin: 5px 0; font-size: 0.9em;"><strong>Usage :</strong> ${conseil}</p>
+                <div class="vigilance">
+                    ⚠️ Vigilance : Pas d'HE chez l'enfant/femme enceinte sans avis pro.
+                </div>
+            </div>
+            <button style="width:100%; margin-top:15px;" onclick="location.reload()">Nouveau Diagnostic</button>
+        `;
+    }
+</script>
+
+</body>
+</html>
