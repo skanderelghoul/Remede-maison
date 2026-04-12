@@ -66,4 +66,85 @@
             inflamLabel: "Is the joint red, hot, or do you have a fever?",
             yes: "Yes", no: "No",
             emergency: "🛑 STOP! Your situation requires immediate medical advice. Do not take any herbal remedy.",
-            categories: {
+            categories: { pain: "Pain & Injuries 🤕" },
+            subPain: {
+                joint: "Joint Pain",
+                sprain: "Sprain",
+                wound: "Small Wound"
+            },
+            remedies: {
+                joint: { name: "Ajamoda (Celery Powder)", prep: "Take 1-3g of powder with warm water, twice daily.", source: "Source: WHO (Traditional Herbal Remedies)" },
+                sprain: { name: "Haridra (Turmeric Paste)", prep: "Mix powder with water to make a paste. Apply to the area.", source: "Source: WHO" },
+                wound: { name: "Haridra (Antiseptic)", prep: "Apply powder directly to the cleaned wound.", source: "Source: WHO" }
+            }
+        }
+    };
+
+    function render() {
+        const app = document.getElementById('app');
+        const t = content[lang];
+
+        if (currentStep === 'lang') {
+            app.innerHTML = `<h1>${t.title}</h1><button class="btn btn-primary" onclick="setLang('fr')">Français 🇫🇷</button><button class="btn btn-primary" onclick="setLang('en')">English 🇬🇧</button>`;
+        } 
+        else if (currentStep === 'category') {
+            app.innerHTML = `<h1>${t.title}</h1><p>${t.intro}</p><button class="btn btn-primary" onclick="setCat('pain')">${t.categories.pain}</button>`;
+        }
+        else if (currentStep === 'sub-pain') {
+            app.innerHTML = `<h1>${t.categories.pain}</h1><button class="btn btn-primary" onclick="setSub('joint')">${t.subPain.joint}</button><button class="btn btn-primary" onclick="setSub('sprain')">${t.subPain.sprain}</button><button class="btn btn-primary" onclick="setSub('wound')">${t.subPain.wound}</button>`;
+        }
+        else if (currentStep === 'safety') {
+            app.innerHTML = `
+                <h1>${t.safetyTitle}</h1>
+                <div class="slider-container">
+                    <label>${t.evaLabel}</label><br>
+                    <input type="range" id="eva" min="0" max="10" value="0" oninput="updateEva(this.value)">
+                    <div id="evaVal" class="eva-display" style="color: green">0</div>
+                </div>
+                <p>${t.durationLabel}</p>
+                <button class="btn btn-primary" onclick="isEmergency()">Oui</button>
+                <button class="btn btn-primary" onclick="checkInflam()">Non</button>
+            `;
+        }
+    }
+
+    function setLang(l) { lang = l; currentStep = 'category'; render(); }
+    function setCat(c) { selectedCategory = c; currentStep = 'sub-pain'; render(); }
+    function setSub(s) { selectedSub = s; currentStep = 'safety'; render(); }
+    
+    function updateEva(val) {
+        const display = document.getElementById('evaVal');
+        display.innerText = val;
+        display.style.color = val < 4 ? 'green' : (val < 7 ? 'orange' : 'red');
+        if (val >= 7) isEmergency();
+    }
+
+    function isEmergency() {
+        const t = content[lang];
+        document.getElementById('app').innerHTML = `<div class="warning">${t.emergency}</div><button class="btn btn-primary" onclick="location.reload()">Retour</button>`;
+    }
+
+    function checkInflam() {
+        const t = content[lang];
+        document.getElementById('app').innerHTML = `
+            <h1>${t.safetyTitle}</h1>
+            <p>${t.inflamLabel}</p>
+            <button class="btn btn-danger" onclick="isEmergency()">${t.yes}</button>
+            <button class="btn btn-primary" onclick="showRemedy()">${t.no}</button>
+        `;
+    }
+
+    function showRemedy() {
+        const t = content[lang];
+        const rem = t.remedies[selectedSub];
+        document.getElementById('app').innerHTML = `
+            <h1>🌿 ${rem.name}</h1>
+            <div class="info-box"><p>${rem.prep}</p><small>${rem.source}</small></div>
+            <button class="btn btn-primary" onclick="location.reload()">Merci Granny !</button>
+        `;
+    }
+
+    render();
+</script>
+</body>
+</html>
