@@ -1,0 +1,1222 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Remède maison — Plantes de Tunisie</title>
+<meta name="description" content="Décrivez votre mal et trouvez un remède maison à base de plantes présentes ou vendues en Tunisie : préparation, précautions, quand consulter.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@500;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* VOICE  calme, rassurant, pratique : un herboriste de quartier qui explique et met en garde
+   IDEA   l'étagère du 3attar : chaque plante est un bocal étiqueté en français et en arabe
+   PICTURE l'outil « décrivez votre mal » en tête, sur un champ vert d'herbes séchées, bocaux dessinés en frise
+   COLOUR vert romarin profond (dominant), papier blanc (support), safran du curcuma (accent)
+   TYPE   Reem Kufi pour les titres (lettrage koufique), IBM Plex Sans Arabic pour le texte latin + arabe
+   LAYOUT bande verte de recherche pleine largeur, résultats en colonne, étagère de bocaux en grille */
+:root{color-scheme:light dark;
+--bg:light-dark(#ffffff,#0f1712);--paper:light-dark(#f4f6f1,#16211a);--ink:light-dark(#18231b,#e8efe8);--muted:light-dark(#4f5e53,#a9b8ad);
+--green:light-dark(#1f4a33,#173826);--green2:light-dark(#2d6a4a,#5fae84);--line:light-dark(#d9e2da,#2a3a2f);
+--saffron:#f0a81c;--saffronInk:light-dark(#8a5a00,#f5c25b);--warn:light-dark(#9b2c1f,#ff9b8a);--warnBg:light-dark(#fdf0ec,#2a1815)}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+html{scroll-padding-top:72px;scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 "IBM Plex Sans Arabic",system-ui,sans-serif;overflow-x:clip}
+h1,h2,h3{font-family:"Reem Kufi","IBM Plex Sans Arabic",sans-serif;line-height:1.08;text-wrap:balance;margin:0}
+h1{font-size:clamp(32px,5vw,50px);font-weight:700}h2{font-size:clamp(26px,3.4vw,36px);font-weight:700}h3{font-size:20px;font-weight:500}
+a{color:var(--green2)}
+.band{padding:clamp(28px,4vw,64px) max(5vw,16px)}
+.wrap{max-width:1240px;margin:0 auto}
+.ar{font-family:"IBM Plex Sans Arabic",sans-serif;direction:rtl;unicode-bidi:isolate}
+button{font:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--saffron);outline-offset:2px}
+
+/* barre */
+.top{position:sticky;top:0;z-index:20;background:var(--green);color:#fff;padding:10px max(5vw,16px)}
+.top .wrap{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.logo{font-family:"Reem Kufi",sans-serif;font-size:22px;font-weight:700;color:#fff;text-decoration:none;display:flex;gap:10px;align-items:baseline}
+.logo .ar{font-size:17px;color:var(--saffron);font-weight:500}
+.top nav{display:flex;gap:4px;flex-wrap:wrap;margin-inline-start:auto}
+.top nav a{color:#fff;text-decoration:none;padding:10px 12px;border-radius:8px;font-size:15px}
+.top nav a:hover{background:rgba(255,255,255,.12)}
+
+/* recherche */
+.hero{background:var(--green);color:#fff;padding-top:clamp(20px,3vw,40px);position:relative;overflow:hidden}
+.hero h1{max-width:28ch}
+.hero p.lead{font-size:17px;max-width:62ch;color:#dbe9df;margin:14px 0 22px}
+.shelf{display:block;width:100%;height:auto;max-height:150px;margin:6px 0 18px}
+.search{display:flex;gap:10px;flex-wrap:wrap;background:#fff;border-radius:16px;padding:10px;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+.search textarea{flex:1 1 300px;border:0;resize:vertical;min-height:58px;font:17px/1.4 inherit;font-family:inherit;color:#18231b;padding:10px 12px;border-radius:10px;background:#f4f6f1}
+.search button{flex:0 0 auto;min-height:48px;padding:0 22px;border:0;border-radius:10px;background:var(--saffron);color:#2b1d00;font-weight:600;font-size:16px}
+.examples{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;align-items:center;font-size:15px;color:#dbe9df}
+.chip{border:1px solid rgba(255,255,255,.35);background:transparent;color:#fff;border-radius:999px;padding:8px 14px;min-height:40px;font-size:15px}
+.chip:hover,.chip[aria-pressed=true]{background:#fff;color:var(--green)}
+.cats{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr));gap:18px 26px;margin-top:30px}
+.cat h3{font-size:16px;color:var(--saffron);margin-bottom:8px}
+.cat .chips{display:flex;flex-wrap:wrap;gap:6px}
+.cat .chip{font-size:14px;padding:6px 12px;min-height:36px}
+
+/* résultats */
+#resultats:empty{display:none}
+.res-head{display:flex;flex-wrap:wrap;gap:12px;align-items:baseline;justify-content:space-between;margin-bottom:18px}
+.res-head p{margin:0;color:var(--muted)}
+.mal{border:1px solid var(--line);border-radius:18px;margin-bottom:26px;overflow:hidden;background:var(--bg)}
+.mal>header{padding:18px 22px;background:var(--paper);display:flex;flex-wrap:wrap;gap:8px 16px;align-items:baseline}
+.mal>header .cat-name{font-size:14px;color:var(--muted)}
+.alerte{margin:0;padding:12px 22px;background:var(--warnBg);color:var(--warn);font-size:15px;border-top:1px solid var(--line)}
+.alerte strong{font-weight:600}
+.remedes{list-style:none;margin:0;padding:0}
+.remede{display:grid;grid-template-columns:minmax(0,220px) minmax(0,1fr);gap:6px 22px;padding:16px 22px;border-top:1px solid var(--line)}
+.remede .who button{all:unset;cursor:pointer;font-family:"Reem Kufi",sans-serif;font-size:19px;color:var(--green2);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
+.remede .who .sub{display:block;color:var(--muted);font-size:15px}
+.f-head .ar,.remede .ar{display:inline-block}.jar .ar{align-self:flex-start}
+.base{display:block;font-size:15px;color:var(--muted);margin-bottom:4px}
+.remede p{margin:0 0 6px}
+.prec-mini{font-size:14px;color:var(--warn)}
+.badges{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}
+.b{font-size:13px;border-radius:6px;padding:2px 8px;border:1px solid var(--line);color:var(--muted);white-space:nowrap}
+.b.r{background:var(--green2);border-color:var(--green2);color:var(--bg)}
+.b.t{border-color:var(--saffron);color:var(--saffronInk)}
+.vide{padding:22px;border:1px dashed var(--line);border-radius:14px;color:var(--muted)}
+
+/* étagère */
+.tools{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:18px 0 22px}
+.tools input{flex:1 1 260px;min-height:46px;font:16px inherit;font-family:inherit;padding:0 14px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink)}
+.filt{border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:999px;padding:8px 14px;min-height:42px;font-size:14px}
+.filt[aria-pressed=true]{background:var(--green);color:#fff;border-color:var(--green)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,230px),1fr));gap:16px}
+.jar{all:unset;box-sizing:border-box;cursor:pointer;display:flex;flex-direction:column;gap:4px;padding:16px 16px 14px;border-radius:14px 14px 18px 18px;background:var(--paper);border:1px solid var(--line);position:relative;transition:transform .15s}
+.jar:hover{transform:translateY(-3px)}
+.jar:focus-visible{outline:3px solid var(--saffron)}
+.jar::before{content:"";position:absolute;top:-1px;left:18%;right:18%;height:8px;border-radius:0 0 6px 6px;background:var(--green2);opacity:.8}
+.jar .fr{font-family:"Reem Kufi",sans-serif;font-size:19px;margin-top:6px}
+.jar .ar{font-size:17px;color:var(--green2)}
+.jar .lat{font-style:italic;font-size:13px;color:var(--muted)}
+.jar .n{font-size:13px;color:var(--muted);margin-top:auto;padding-top:6px}
+.count{color:var(--muted);font-size:15px}
+
+/* fiche */
+dialog{border:0;border-radius:20px;padding:0;width:min(760px,94vw);max-height:90vh;background:var(--bg);color:var(--ink);box-shadow:0 20px 60px rgba(0,0,0,.4)}
+dialog::backdrop{background:rgba(10,20,14,.55)}
+.f-head{background:var(--green);color:#fff;padding:22px 24px;position:sticky;top:0;z-index:1}
+.f-head .ar{color:var(--saffron);font-size:20px}
+.f-head .lat{font-style:italic;color:#cfe0d4;font-size:15px}
+.f-close{position:absolute;top:12px;inset-inline-end:12px;width:44px;height:44px;border-radius:50%;border:0;background:rgba(255,255,255,.15);color:#fff;font-size:22px}
+.f-body{padding:20px 24px 26px}
+.f-body h3{margin:20px 0 8px}
+.f-body ul{padding-inline-start:20px;margin:0}
+.f-body li{margin-bottom:8px}
+.usage{border-top:1px solid var(--line);padding:10px 0}
+.usage .m{font-weight:600}
+.precs{background:var(--warnBg);color:var(--warn);border-radius:12px;padding:12px 16px 12px 34px}
+.verif{font-size:13px;color:var(--saffronInk)}
+
+/* éviter + infos */
+.avoid{background:var(--paper)}
+.avoid-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:14px;margin-top:20px}
+.avoid-list div{background:var(--bg);border:1px solid var(--line);border-inline-start:5px solid var(--warn);border-radius:10px;padding:14px 16px}
+.avoid-list b{font-family:"Reem Kufi",sans-serif;font-size:18px;font-weight:500}
+.avoid-list p{margin:6px 0 0;font-size:15px}
+.infos{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:30px;margin-top:20px}
+.infos ul{padding-inline-start:20px;margin:8px 0}.infos li{margin-bottom:6px}
+.num{font-size:22px;font-weight:600;white-space:nowrap}
+footer{background:var(--green);color:#dbe9df;font-size:14px}
+footer a{color:#fff}
+@media(max-width:600px){html{scroll-padding-top:110px}.remede{grid-template-columns:1fr}.top{padding-block:6px}.top .wrap{gap:2px}.top nav{width:100%;margin:0;flex-wrap:nowrap;overflow-x:auto}.top nav a{flex:none;padding:8px 9px;font-size:14px}.f-body,.f-head{padding-inline:18px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.jar{transition:none}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="logo" href="#chercher">Remède maison <span class="ar">دواء عربي</span></a>
+  <nav aria-label="Sections"><a href="#chercher">Mes maux</a><a href="#plantes">Les plantes</a><a href="#eviter">À éviter</a><a href="#infos">Bon à savoir</a></nav>
+</div></header>
+
+<section class="hero band" id="chercher"><div class="wrap">
+  <svg class="shelf" viewBox="0 0 1200 150" role="img" aria-label="Étagère d'herboriste avec des bocaux de plantes">
+    <defs>
+      <linearGradient id="glass" x1="0" x2="1"><stop offset="0" stop-color="#fff" stop-opacity=".28"/><stop offset=".5" stop-color="#fff" stop-opacity=".1"/><stop offset="1" stop-color="#fff" stop-opacity=".22"/></linearGradient>
+      <g id="jar"><rect x="-38" y="-108" width="76" height="102" rx="16" fill="url(#glass)" stroke="#fff" stroke-opacity=".55" stroke-width="2"/><rect x="-28" y="-122" width="56" height="16" rx="4" fill="#f0a81c"/><rect x="-26" y="-70" width="52" height="30" rx="4" fill="#fff" fill-opacity=".92"/><rect x="-30" y="-12" width="60" height="6" rx="3" fill="#000" fill-opacity=".15"/></g>
+    </defs>
+    <rect x="0" y="140" width="1200" height="10" fill="#0f2a1c"/><rect x="0" y="136" width="1200" height="4" fill="#3c7a57"/>
+    <g id="jars"></g>
+  </svg>
+  <h1>Décrivez votre mal, trouvez la plante qui soulage</h1>
+  <p class="lead">Des remèdes maison tirés de trois ouvrages de référence, uniquement avec des plantes qui poussent en Tunisie ou s'achètent au souk, chez l'herboriste ou en pharmacie. Écrivez en français, en arabe ou en derja.</p>
+  <form class="search" id="f" role="search">
+    <label for="q" class="sr" style="position:absolute;left:-9999px">Décrivez ce que vous ressentez</label>
+    <textarea id="q" rows="2" placeholder="Ex. : j'ai la toux et mal à la gorge depuis hier… / عندي كحة"></textarea>
+    <button type="submit">Trouver un remède</button>
+  </form>
+  <div class="examples" id="ex"><span>Essayez :</span></div>
+  <div class="cats" id="cats"></div>
+</div></section>
+
+<section class="band" id="resultats" aria-live="polite"></section>
+
+<section class="band" id="plantes"><div class="wrap">
+  <h2>L'étagère de l'herboriste</h2>
+  <p class="count" id="count"></p>
+  <div class="tools">
+    <input id="pq" type="search" placeholder="Chercher une plante : romarin, زعتر, helba…" aria-label="Chercher une plante">
+    <div id="filters" style="display:flex;flex-wrap:wrap;gap:6px"></div>
+  </div>
+  <div class="grid" id="grid"></div>
+</div></section>
+
+<section class="band avoid" id="eviter"><div class="wrap">
+  <h2>Plantes locales à ne pas utiliser en remède maison</h2>
+  <p>Elles sont courantes en Tunisie, parfois vendues chez l'herboriste, mais provoquent chaque année des intoxications graves. En cas d'ingestion : <b>SAMU 190</b> ou <b>Centre anti-poison (CAMU) 71 335 500</b>.</p>
+  <div class="avoid-list" id="avoid"></div>
+</div></section>
+
+<section class="band" id="infos"><div class="wrap">
+  <h2>Bon à savoir avant toute tisane</h2>
+  <div class="infos">
+    <div><h3>Les règles d'or</h3><ul>
+      <li>Les plantes soulagent les petits maux ; elles ne remplacent ni un diagnostic ni un traitement prescrit.</li>
+      <li>Grossesse, allaitement, bébé, enfant, personne âgée, maladie chronique ou médicaments en cours : demandez d'abord l'avis de votre médecin ou pharmacien.</li>
+      <li>Respectez les doses et la durée : « naturel » ne veut pas dire « sans danger ».</li>
+      <li>Achetez des plantes bien identifiées, propres et récentes ; en cas de doute sur une cueillette, ne la consommez pas.</li>
+      <li>Les huiles essentielles ne s'avalent pas sans avis d'un professionnel.</li>
+      <li>Si les symptômes durent plus de 3 jours ou s'aggravent, consultez.</li>
+    </ul></div>
+    <div><h3>Repères de préparation</h3><ul>
+      <li><b>Infusion</b> : eau bouillante versée sur la plante, couvrir 5 à 10 min (feuilles, fleurs).</li>
+      <li><b>Décoction</b> : la plante bout 5 à 15 min dans l'eau (racines, écorces, graines dures).</li>
+      <li><b>1 c. à café</b> de plante sèche ≈ 1 à 2 g ; une tasse ≈ 150 à 200 ml.</li>
+      <li><b>Usage reconnu</b> : usage soutenu par des études cliniques ou des autorités (Commission E allemande, OMS). <b>Usage traditionnel</b> : transmis par la tradition, peu ou pas étudié.</li>
+    </ul></div>
+    <div><h3>Urgences en Tunisie</h3>
+      <p><span class="num">190</span> SAMU — urgence médicale<br><span class="num">198</span> Protection civile<br><span class="num">71 335 500</span> Centre anti-poison (CAMU, Tunis)</p>
+      <h3>Disponibilité</h3><div id="legend" class="badges"></div>
+    </div>
+  </div>
+</div></section>
+
+<footer class="band"><div class="wrap">
+  <p><b>Sources</b> — <span id="sources"></span>. Les textes du site sont des résumés rédigés à partir de ces ouvrages, pas des citations. Noms en derja marqués « à confirmer » : vérification en cours.</p>
+  <p>Ce site informe et ne remplace pas l'avis d'un médecin ou d'un pharmacien.</p>
+</div></footer>
+
+<dialog id="fiche" aria-labelledby="f-title"></dialog>
+
+<script>
+// Liste des maux (affections courantes) — clé : identifiant utilisé dans les fiches plantes
+// kw : mots-clés de recherche (français, arabe, derja tunisienne) ; alerte : quand consulter
+const CATEGORIES = [
+  { id: "digestion", nom: "Digestion", couleur: "#9a6b2f" },
+  { id: "respiration", nom: "Rhume, toux & gorge", couleur: "#3f7a8c" },
+  { id: "bouche", nom: "Bouche & dents", couleur: "#8c4f6b" },
+  { id: "nerfs", nom: "Stress, sommeil & tête", couleur: "#5d5aa0" },
+  { id: "peau", nom: "Peau & cheveux", couleur: "#b5532f" },
+  { id: "douleurs", nom: "Douleurs", couleur: "#7a5c3a" },
+  { id: "femme", nom: "Santé de la femme", couleur: "#a3476b" },
+  { id: "urinaire", nom: "Voies urinaires", couleur: "#2f7f6f" },
+  { id: "metabolisme", nom: "Cœur, cholestérol & sucre", couleur: "#a33b3b" }
+];
+
+const MAUX = {
+  // --- Digestion
+  ballonnements: { nom: "Ballonnements & gaz", cat: "digestion", kw: ["ballonnement", "gaz", "flatulence", "ventre gonflé", "aérophagie", "nefkha", "nafkha", "نفخة", "انتفاخ", "ghazet"], alerte: "Consultez si les ballonnements s'accompagnent d'un amaigrissement, de sang dans les selles ou de douleurs intenses." },
+  indigestion: { nom: "Digestion lente & indigestion", cat: "digestion", kw: ["indigestion", "digestion difficile", "lourdeur", "estomac", "dyspepsie", "repas lourd", "kerch", "كرش", "عسر الهضم", "ma3da", "معدة"], alerte: "Une douleur d'estomac qui irradie dans la poitrine, le bras ou la mâchoire est une urgence (190 / SAMU)." },
+  nausees: { nom: "Nausées & mal des transports", cat: "digestion", kw: ["nausée", "vomissement", "envie de vomir", "mal des transports", "mal de mer", "غثيان", "تقيؤ", "tarji3", "dawkha"], alerte: "Consultez si les vomissements durent plus de 24 h, empêchent de boire, ou chez un jeune enfant." },
+  constipation: { nom: "Constipation", cat: "digestion", kw: ["constipation", "transit", "constipé", "إمساك", "imsak", "m9abbadh"], alerte: "Consultez en cas de constipation récente et inhabituelle après 50 ans, de sang dans les selles ou de douleurs fortes." },
+  diarrhee: { nom: "Diarrhée", cat: "digestion", kw: ["diarrhée", "selles liquides", "gastro", "إسهال", "ishal", "kerch tejri"], alerte: "Buvez beaucoup (solution de réhydratation). Consultez si sang dans les selles, fièvre élevée, plus de 48 h, ou chez un nourrisson/une personne âgée." },
+  acidite: { nom: "Brûlures d'estomac & acidité", cat: "digestion", kw: ["brûlure d'estomac", "acidité", "reflux", "remontées acides", "gastrite", "حموضة", "حرقة", "hmoudha", "7moudha"], alerte: "Consultez si les brûlures sont fréquentes, nocturnes, ou s'accompagnent de difficultés à avaler." },
+  crampesVentre: { nom: "Crampes & coliques abdominales", cat: "digestion", kw: ["colique", "crampe abdominale", "spasme", "mal au ventre", "douleur ventre", "مغص", "wja3 kerch", "وجيعة كرش"], alerte: "Une douleur abdominale intense, localisée (ex. en bas à droite) ou avec fièvre doit être vue rapidement par un médecin." },
+  foie: { nom: "Foie & digestion des graisses", cat: "digestion", kw: ["foie", "vésicule", "bile", "digestion des graisses", "crise de foie", "كبد", "kebda", "mrara", "مرارة"], alerte: "Jaunisse (peau ou yeux jaunes), urines foncées ou douleur sous les côtes droites : consultez sans tarder." },
+  appetit: { nom: "Manque d'appétit", cat: "digestion", kw: ["appétit", "anorexie", "pas faim", "ouvrir l'appétit", "فقدان الشهية", "chahia"], alerte: "Une perte d'appétit durable avec amaigrissement doit être explorée par un médecin." },
+
+  // --- Respiration / ORL
+  rhume: { nom: "Rhume & nez bouché", cat: "respiration", kw: ["rhume", "nez bouché", "nez qui coule", "sinus", "refroidissement", "زكام", "bard", "برد", "rouma", "nzla", "نزلة"], alerte: "Consultez si les symptômes durent plus de 10 jours, ou en cas de douleur forte au visage ou de fièvre élevée." },
+  toux: { nom: "Toux", cat: "respiration", kw: ["toux", "tousse", "toux sèche", "toux grasse", "كحة", "سعال", "kohha", "ka77a", "9o77a"], alerte: "Consultez si la toux dure plus de 3 semaines, en cas de sang, d'essoufflement ou de fièvre persistante." },
+  gorge: { nom: "Mal de gorge & voix enrouée", cat: "respiration", kw: ["gorge", "angine", "pharyngite", "voix enrouée", "extinction de voix", "حلق", "اللوزتين", "7al9", "gorjem"], alerte: "Consultez si vous avez du mal à avaler ou à respirer, ou si la fièvre dépasse 38,5 °C plus de 2 jours." },
+  bronches: { nom: "Bronches encombrées", cat: "respiration", kw: ["bronchite", "bronches", "mucus", "glaires", "expectorer", "poitrine encombrée", "صدر", "بلغم", "sdar"], alerte: "Essoufflement, sifflement important ou fièvre persistante : consultez un médecin." },
+  fievre: { nom: "Fièvre & état grippal", cat: "respiration", kw: ["fièvre", "grippe", "frissons", "courbatures", "سخانة", "حمى", "skhana", "s5ana", "grippe"], alerte: "Consultez si la fièvre dépasse 39 °C, dure plus de 3 jours, ou immédiatement chez un nourrisson de moins de 3 mois." },
+
+  // --- Bouche
+  dents: { nom: "Mal de dents", cat: "bouche", kw: ["dent", "rage de dents", "carie", "douleur dentaire", "سنين", "ضرس", "wja3 snin", "dhers"], alerte: "Les remèdes soulagent en attendant : seul le dentiste traite la cause. Gonflement de la joue + fièvre = consultation rapide." },
+  gencives: { nom: "Gencives & aphtes", cat: "bouche", kw: ["gencive", "aphte", "bouche", "saignement des gencives", "stomatite", "لثة", "قرحة الفم", "nifa"], alerte: "Un aphte ou une plaie de la bouche qui ne guérit pas en 2 à 3 semaines doit être montré à un médecin ou dentiste." },
+  haleine: { nom: "Mauvaise haleine", cat: "bouche", kw: ["haleine", "mauvaise haleine", "رائحة الفم", "ri7et el fom"], alerte: "Une mauvaise haleine persistante peut venir des dents, des gencives ou de l'estomac : parlez-en à votre dentiste." },
+
+  // --- Nerfs / sommeil
+  stress: { nom: "Stress & nervosité", cat: "nerfs", kw: ["stress", "anxiété", "nervosité", "angoisse", "énervement", "قلق", "توتر", "9la9", "qala9", "m9allak"], alerte: "Si l'anxiété est envahissante, s'accompagne d'idées noires ou de crises de panique, parlez-en à un médecin." },
+  sommeil: { nom: "Troubles du sommeil", cat: "nerfs", kw: ["insomnie", "sommeil", "dormir", "dors mal", "dort mal", "endormir", "réveil nocturne", "أرق", "نوم", "nawm", "ma nor9odch"], alerte: "Une insomnie qui dure plus d'un mois mérite un avis médical." },
+  tete: { nom: "Maux de tête & migraine", cat: "nerfs", kw: ["mal de tête", "céphalée", "migraine", "tête", "صداع", "وجيعة راس", "wji3et ras", "sda3"], alerte: "Urgence : mal de tête brutal et violent, avec raideur de la nuque, fièvre, trouble de la parole ou de la vision." },
+  fatigue: { nom: "Fatigue & concentration", cat: "nerfs", kw: ["fatigue", "épuisement", "concentration", "mémoire", "coup de barre", "تعب", "ذاكرة", "ta3ab", "3ya"], alerte: "Une fatigue qui dure plusieurs semaines peut cacher une anémie, un problème de thyroïde ou un diabète : faites un bilan." },
+
+  // --- Peau
+  plaies: { nom: "Petites plaies & coupures", cat: "peau", kw: ["plaie", "coupure", "égratignure", "écorchure", "cicatrisation", "جرح", "jor7", "jer7"], alerte: "Plaie profonde, qui saigne beaucoup, morsure ou plaie souillée : consultez (vaccin antitétanique)." },
+  brulures: { nom: "Brûlures légères & coups de soleil", cat: "peau", kw: ["brûlure", "coup de soleil", "حرق", "شمس", "7ar9", "7ar9a"], alerte: "Refroidissez 15 min à l'eau tiède. Brûlure étendue, profonde, au visage ou chez un enfant : consultez." },
+  peauIrritee: { nom: "Eczéma & peau irritée", cat: "peau", kw: ["eczéma", "démangeaison", "peau sèche", "irritation", "rougeur", "acné", "حكة", "إكزيما", "7akka", "bouton"], alerte: "Consultez si l'éruption s'étend, suinte, s'infecte ou s'accompagne de fièvre." },
+  mycoses: { nom: "Mycoses de la peau", cat: "peau", kw: ["mycose", "champignon", "pied d'athlète", "candida", "فطريات", "ongle"], alerte: "Les mycoses des ongles ou très étendues nécessitent souvent un traitement médical." },
+  insectes: { nom: "Piqûres & insectes", cat: "peau", kw: ["piqûre", "moustique", "insecte", "poux", "répulsif", "ناموس", "قمل", "namous", "9mal"], alerte: "Gonflement du visage, gêne respiratoire après une piqûre : urgence (190 / SAMU)." },
+  cheveux: { nom: "Cheveux & cuir chevelu", cat: "peau", kw: ["cheveux", "chute de cheveux", "pellicules", "cuir chevelu", "شعر", "تساقط الشعر", "cha3r"], alerte: "Une chute de cheveux brutale ou en plaques mérite un avis médical." },
+
+  // --- Douleurs
+  articulations: { nom: "Douleurs articulaires & rhumatismes", cat: "douleurs", kw: ["arthrose", "rhumatisme", "articulation", "genou", "dos", "lombalgie", "goutte", "مفاصل", "روماتيزم", "mfasel", "dhar"], alerte: "Articulation rouge, chaude et gonflée avec fièvre : consultez rapidement." },
+  muscles: { nom: "Douleurs musculaires & entorses", cat: "douleurs", kw: ["muscle", "courbature", "contracture", "entorse", "foulure", "torticolis", "عضلات", "التواء", "f9ouss"], alerte: "Impossibilité d'appuyer sur le membre ou déformation : faites une radio." },
+
+  // --- Femme
+  regles: { nom: "Règles douloureuses", cat: "femme", kw: ["règles", "règles douloureuses", "dysménorrhée", "menstruation", "الدورة", "العادة الشهرية", "dawra", "7aydh"], alerte: "Des règles très douloureuses ou très abondantes doivent être explorées (endométriose, fibrome…)." },
+  menopause: { nom: "Ménopause & transpiration", cat: "femme", kw: ["ménopause", "bouffées de chaleur", "transpiration", "sueurs", "سن اليأس", "عرق", "3ra9"], alerte: "Tout saignement après la ménopause doit être signalé à un médecin." },
+  allaitement: { nom: "Allaitement (lait maternel)", cat: "femme", kw: ["allaitement", "lait maternel", "montée de lait", "رضاعة", "حليب", "rdha3a"], alerte: "Demandez toujours l'avis d'une sage-femme ou d'un médecin avant toute plante pendant l'allaitement." },
+
+  // --- Urinaire
+  urinaire: { nom: "Confort urinaire", cat: "urinaire", kw: ["cystite", "infection urinaire", "brûlure en urinant", "uriner", "diurétique", "rétention d'eau", "مثانة", "بول", "boul"], alerte: "Fièvre, douleur dans le dos (reins), sang dans les urines, homme, femme enceinte : consultez — une infection urinaire se traite souvent par antibiotique." },
+  calculs: { nom: "Calculs rénaux (prévention)", cat: "urinaire", kw: ["calcul", "colique néphrétique", "rein", "pierre", "gravelle", "حصى", "كلى", "7sa", "kla"], alerte: "Une colique néphrétique (douleur violente du flanc) nécessite un avis médical, surtout avec fièvre." },
+
+  // --- Métabolisme
+  cholesterol: { nom: "Cholestérol", cat: "metabolisme", kw: ["cholestérol", "triglycérides", "lipides", "كوليسترول", "دهون"], alerte: "Les plantes accompagnent l'hygiène de vie mais ne remplacent pas un traitement prescrit. Parlez-en à votre médecin." },
+  glycemie: { nom: "Glycémie (en complément)", cat: "metabolisme", kw: ["diabète", "sucre", "glycémie", "سكري", "سكر", "soukkor", "skar"], alerte: "Ne jamais arrêter ni modifier un traitement du diabète. Certaines plantes renforcent l'effet des médicaments : risque d'hypoglycémie." },
+  tension: { nom: "Tension artérielle (en complément)", cat: "metabolisme", kw: ["tension", "hypertension", "pression artérielle", "ضغط", "tension 3alia", "dha8t"], alerte: "Ne remplacez jamais un traitement antihypertenseur. Mesurez votre tension et parlez-en à votre médecin." },
+  circulation: { nom: "Jambes lourdes & hémorroïdes", cat: "metabolisme", kw: ["jambes lourdes", "varices", "circulation", "hémorroïdes", "بواسير", "دوالي", "bwasir"], alerte: "Jambe gonflée, rouge et douloureuse d'un seul côté : consultez en urgence (risque de phlébite)." }
+};
+
+// Fiches plantes — sélection des plantes présentes (sauvages ou cultivées) ou vendues en Tunisie
+// présentes dans au moins un des livres sources.
+// dispo : S = pousse à l'état sauvage en Tunisie · C = cultivée en Tunisie · M = marché / souk / épicerie
+//         H = herboriste (3attar) · P = pharmacie / parapharmacie
+// u : [mal, préparation, niveau] — niveau "r" = usage reconnu (études cliniques, Commission E, OMS), "t" = usage traditionnel
+// src : L = Larousse des plantes médicinales (A. Chevallier) · D = J. A. Duke, Handbook of Medicinal Herbs · O = OMS, Traditional Herbal Remedies for Primary Health Care (2010)
+// verif : true = nom local à confirmer
+const PLANTES = [
+  // ===================== Aromatiques (Lamiacées)
+  { id: "romarin", fr: "Romarin", lat: "Rosmarinus officinalis", fam: "Lamiacées", ar: "إكليل الجبل", dj: "Klil", dispo: ["S", "C", "M", "H"],
+    parties: "Feuilles et sommités fleuries",
+    resume: "Arbuste des garrigues tunisiennes (Dorsale, Cap Bon, Kasserine). Plante tonique et digestive, utile aussi en friction contre les douleurs.",
+    u: [
+      ["indigestion", "Infusion : 1 c. à café de feuilles séchées (≈ 2 g) dans une tasse d'eau bouillante, 10 min. 1 tasse après les repas, jusqu'à 3 par jour.", "r"],
+      ["foie", "Même infusion, après un repas riche : le romarin stimule la sécrétion de bile.", "r"],
+      ["fatigue", "1 tasse d'infusion le matin ou en début d'après-midi (effet stimulant, éviter le soir).", "t"],
+      ["articulations", "Friction : macérer une poignée de rameaux 2 semaines dans 250 ml d'huile d'olive, filtrer ; masser les zones douloureuses.", "r"],
+      ["muscles", "Même huile de massage, ou bain chaud avec une décoction de 50 g de romarin.", "r"],
+      ["cheveux", "Rinçage : infusion forte (2 c. à soupe pour 500 ml) refroidie, en dernier rinçage pour tonifier le cuir chevelu.", "t"]
+    ],
+    prec: ["Pas de doses fortes ni d'huile essentielle pendant la grossesse.", "Huile essentielle : jamais par voie interne sans avis médical ; prudence en cas d'épilepsie (camphre).", "Éviter en cas de calculs biliaires sans avis médical."],
+    src: ["L", "D"] },
+
+  { id: "thym", fr: "Thym", lat: "Thymus vulgaris (et thyms locaux : Thymus capitatus…)", fam: "Lamiacées", ar: "زعتر", dj: "Zaâtar", dispo: ["S", "C", "M", "H"],
+    parties: "Parties aériennes fleuries",
+    resume: "Le zaâtar tunisien (thym à tête, Thymbra capitata) et le thym commun ont des usages proches : antiseptique respiratoire de référence.",
+    u: [
+      ["toux", "Infusion : 1 c. à café (1–2 g) par tasse, 10 min à couvert ; 3 tasses par jour, sucrées au miel.", "r"],
+      ["bronches", "Même infusion ; ou inhalation : une poignée de thym dans un bol d'eau bouillante, respirer la vapeur 10 min sous une serviette.", "r"],
+      ["gorge", "Gargarisme : infusion tiède (2 c. à café pour 250 ml), 3 fois par jour.", "t"],
+      ["ballonnements", "1 tasse d'infusion après le repas.", "t"],
+      ["gencives", "Bain de bouche avec l'infusion refroidie.", "t"]
+    ],
+    prec: ["Huile essentielle irritante : ne pas avaler, jamais pure sur la peau, pas chez l'enfant ni la femme enceinte.", "Infusion : déconseillée à forte dose pendant la grossesse.", "Chez l'enfant de moins de 1 an : demander l'avis du pédiatre."],
+    src: ["L", "D"] },
+
+  { id: "sauge", fr: "Sauge officinale", lat: "Salvia officinalis", fam: "Lamiacées", ar: "سالمية / مريمية", dj: "Salmiya", dispo: ["C", "M", "H"],
+    parties: "Feuilles",
+    resume: "Très utilisée en Tunisie en tisane. Astringente et antiseptique : la plante de la gorge et des transpirations excessives.",
+    u: [
+      ["gorge", "Gargarisme : 2 c. à café de feuilles pour 250 ml d'eau bouillante, 10 min ; gargariser 3 fois par jour.", "r"],
+      ["gencives", "Même préparation en bain de bouche pour les aphtes et gencives qui saignent.", "r"],
+      ["menopause", "Infusion : 1 c. à café (≈ 1,5 g) par tasse, 1 à 2 tasses par jour, en cure de 2–3 semaines contre les sueurs.", "r"],
+      ["indigestion", "1 tasse d'infusion après les repas.", "r"]
+    ],
+    prec: ["Contient de la thuyone : pas d'usage prolongé ni de fortes doses.", "Déconseillée pendant la grossesse et l'allaitement (peut diminuer la lactation), et en cas d'épilepsie.", "Huile essentielle : jamais en usage interne.", "Peut interférer avec les traitements du diabète et les sédatifs."],
+    src: ["L", "D"] },
+
+  { id: "menthe", fr: "Menthe verte & menthe poivrée", lat: "Mentha spicata · Mentha × piperita", fam: "Lamiacées", ar: "نعناع", dj: "Naânaâ", dispo: ["C", "M"],
+    parties: "Feuilles",
+    resume: "La menthe du thé tunisien (menthe verte) et la menthe poivrée, plus riche en menthol, apaisent l'estomac et l'intestin.",
+    u: [
+      ["ballonnements", "Infusion : 1 c. à soupe de feuilles fraîches ou 1 c. à café de séchées par tasse, 5–10 min, après le repas.", "r"],
+      ["indigestion", "Même infusion, jusqu'à 3 tasses par jour.", "r"],
+      ["crampesVentre", "Infusion de menthe poivrée, 2–3 tasses par jour (spasmes, côlon irritable).", "r"],
+      ["nausees", "Petites gorgées d'infusion tiède ou mâcher une feuille fraîche.", "r"],
+      ["tete", "Masser les tempes avec quelques feuilles froissées (ou une goutte d'huile essentielle de menthe poivrée diluée dans une c. à café d'huile).", "r"]
+    ],
+    prec: ["Pas de menthe poivrée (et surtout pas d'huile essentielle) chez l'enfant de moins de 5 ans.", "Éviter en cas de reflux / brûlures d'estomac (le menthol relâche le sphincter de l'œsophage).", "Déconseillée en cas de calculs biliaires."],
+    src: ["L", "D"] },
+
+  { id: "pouliot", fr: "Menthe pouliot", lat: "Mentha pulegium", fam: "Lamiacées", ar: "فليو", dj: "Fliou", dispo: ["S", "M", "H"],
+    parties: "Parties aériennes",
+    resume: "Très populaire en Tunisie contre le rhume (fliou au lait ou en tisane). Digestive, mais contient de la pulégone, toxique à forte dose.",
+    u: [
+      ["rhume", "Infusion légère uniquement : ½ c. à café de plante séchée par tasse, 1 à 2 tasses par jour, 3 jours maximum.", "t"],
+      ["ballonnements", "Même infusion légère après le repas.", "t"]
+    ],
+    prec: ["Interdite pendant la grossesse (abortive) et l'allaitement, et chez l'enfant.", "Ne jamais utiliser l'huile essentielle : toxique pour le foie et les reins, même à petites doses.", "Usage court et doses faibles uniquement ; éviter en cas de maladie du foie ou des reins."],
+    src: ["L", "D"] },
+
+  { id: "melisse", fr: "Mélisse", lat: "Melissa officinalis", fam: "Lamiacées", ar: "ترنجان", dj: "Trunjan / mlissa", verif: true, dispo: ["C", "H", "P"],
+    parties: "Feuilles",
+    resume: "Originaire d'Europe du Sud et d'Afrique du Nord. Calmante douce et digestive, bien tolérée.",
+    u: [
+      ["stress", "Infusion : 1–2 c. à café (1,5–4 g) par tasse, 10 min, 2–3 tasses par jour.", "r"],
+      ["sommeil", "1 tasse le soir, seule ou avec de la verveine odorante ou de la camomille.", "r"],
+      ["crampesVentre", "Infusion après le repas (spasmes digestifs d'origine nerveuse).", "r"],
+      ["ballonnements", "Même infusion.", "r"],
+      ["peauIrritee", "Bouton de fièvre (herpès labial) : compresse d'infusion forte refroidie, plusieurs fois par jour.", "r"]
+    ],
+    prec: ["Bien tolérée en infusion.", "Prudence en cas de maladie de la thyroïde (hyperthyroïdie / Basedow) : demander l'avis du médecin.", "Huile essentielle : usage interne sous contrôle médical seulement."],
+    src: ["L", "D"] },
+
+  { id: "lavande", fr: "Lavande (et lavande stéchade)", lat: "Lavandula angustifolia · Lavandula stoechas", fam: "Lamiacées", ar: "خزامى / حلحال", dj: "Khzama / Helhal", dispo: ["S", "C", "M", "H"],
+    parties: "Fleurs, huile essentielle",
+    resume: "La lavande stéchade (helhal) pousse spontanément dans le nord-ouest tunisien. Calmante, et son huile essentielle est un remède de premiers soins.",
+    u: [
+      ["sommeil", "Infusion : 1 c. à café de fleurs par tasse, 10 min, le soir. Ou quelques gouttes d'huile essentielle sur l'oreiller.", "r"],
+      ["stress", "Même infusion, 1–2 tasses par jour ; bain tiède avec une décoction de fleurs.", "r"],
+      ["tete", "Masser tempes et nuque avec 2 gouttes d'huile essentielle de lavande vraie diluées dans 1 c. à café d'huile d'olive.", "t"],
+      ["brulures", "Petite brûlure superficielle, après refroidissement à l'eau : 1 goutte d'huile essentielle de lavande vraie diluée dans un peu d'huile.", "t"],
+      ["insectes", "Piqûre : 1 goutte d'huile essentielle diluée ; sachets de fleurs contre les mites.", "t"]
+    ],
+    prec: ["Huile essentielle : pas d'usage interne sans avis médical, pas chez le jeune enfant.", "L'huile essentielle de lavande stéchade (riche en camphre) est plus toxique que la lavande vraie : ne pas l'appliquer chez l'enfant ni la femme enceinte."],
+    src: ["L", "D"] },
+
+  { id: "marjolaine", fr: "Marjolaine & origan", lat: "Origanum majorana · Origanum vulgare", fam: "Lamiacées", ar: "مردقوش", dj: "Mardgouch", dispo: ["C", "M", "H"],
+    parties: "Parties aériennes",
+    resume: "Aromates méditerranéens, légèrement calmants et digestifs.",
+    u: [
+      ["ballonnements", "Infusion : 1–2 c. à café par tasse, 10 min, après les repas.", "t"],
+      ["rhume", "Infusion chaude ou inhalation de vapeur pour dégager le nez.", "t"],
+      ["sommeil", "1 tasse d'infusion de marjolaine le soir.", "t"],
+      ["regles", "Infusion, 2 tasses par jour pendant les règles.", "t"]
+    ],
+    prec: ["Déconseillées à doses médicinales pendant la grossesse.", "Huiles essentielles : jamais en usage interne."],
+    src: ["L", "D"] },
+
+  { id: "basilic", fr: "Basilic", lat: "Ocimum basilicum", fam: "Lamiacées", ar: "حبق", dj: "Hbaq", dispo: ["C", "M"],
+    parties: "Feuilles",
+    resume: "Présent sur tous les balcons tunisiens, il éloigne les moustiques et aide la digestion.",
+    u: [
+      ["ballonnements", "Infusion : 1 c. à café de feuilles séchées (ou 5 feuilles fraîches) par tasse, après le repas.", "t"],
+      ["nausees", "Même infusion, en petites gorgées.", "t"],
+      ["insectes", "Pots de basilic aux fenêtres ; feuilles froissées frottées sur une piqûre.", "t"]
+    ],
+    prec: ["Pas d'usage médicinal prolongé, ni chez le nourrisson ni pendant la grossesse (estragole).", "Huile essentielle : à éviter en usage interne."],
+    src: ["L", "D"] },
+
+  { id: "marrube", fr: "Marrube blanc", lat: "Marrubium vulgare", fam: "Lamiacées", ar: "مريوت", dj: "Marriwt", verif: true, dispo: ["S", "H"],
+    parties: "Parties aériennes",
+    resume: "Plante amère des bords de chemins et terrains vagues, remède ancien de la toux.",
+    u: [
+      ["toux", "Infusion : 1 c. à café (1–2 g) par tasse, 10 min, 3 tasses par jour, sucrées au miel (très amère).", "r"],
+      ["bronches", "Même infusion (expectorante).", "r"],
+      ["appetit", "1 petite tasse 30 min avant le repas (plante amère).", "r"],
+      ["ballonnements", "1 tasse après le repas.", "r"]
+    ],
+    prec: ["Déconseillé pendant la grossesse.", "À doses élevées (plus de 4–5 tasses), risque de troubles du rythme cardiaque : respecter les doses."],
+    src: ["L", "D"] },
+
+  { id: "verveine", fr: "Verveine odorante", lat: "Aloysia citrodora (syn. Lippia citriodora)", fam: "Verbénacées", ar: "لويزة", dj: "Louiza", dispo: ["C", "M", "H"],
+    parties: "Feuilles",
+    resume: "La « louiza » parfumée au citron, tisane du soir par excellence en Tunisie.",
+    u: [
+      ["sommeil", "Infusion : 1 c. à soupe de feuilles (≈ 2 g) par tasse, 5–10 min, le soir.", "t"],
+      ["stress", "1 à 3 tasses par jour.", "t"],
+      ["indigestion", "1 tasse après le repas.", "t"],
+      ["ballonnements", "Même infusion.", "t"]
+    ],
+    prec: ["Bien tolérée aux doses habituelles.", "Prudence en cas de maladie des reins (essence irritante à forte dose)."],
+    src: ["L", "D"] },
+
+  // ===================== Graines aromatiques (Apiacées)
+  { id: "fenouil", fr: "Fenouil", lat: "Foeniculum vulgare", fam: "Apiacées", ar: "بسباس", dj: "Besbes", dispo: ["S", "C", "M", "H"],
+    parties: "Graines (fruits), bulbe",
+    resume: "Pousse partout au bord des routes en Tunisie. Ses graines sont le remède classique des ballonnements, même chez l'enfant.",
+    u: [
+      ["ballonnements", "Infusion : 1 c. à café de graines légèrement écrasées par tasse, 10 min à couvert, après les repas.", "r"],
+      ["crampesVentre", "Même infusion, 2–3 tasses par jour.", "r"],
+      ["toux", "Infusion de graines avec du miel (léger effet expectorant).", "r"],
+      ["allaitement", "Traditionnellement 1–2 tasses par jour pour favoriser le lait — demander l'avis de la sage-femme.", "t"],
+      ["haleine", "Mâcher quelques graines après le repas.", "t"]
+    ],
+    prec: ["Huile essentielle : ne pas avaler (toxique à forte dose), pas pendant la grossesse ni chez l'enfant.", "Graines en tisane : respecter les doses ; pas d'usage prolongé à fortes doses chez le nourrisson."],
+    src: ["L", "D"] },
+
+  { id: "anis", fr: "Anis vert", lat: "Pimpinella anisum", fam: "Apiacées", ar: "حبة حلاوة", dj: "Habbet hlewa", dispo: ["C", "M", "H"],
+    parties: "Graines",
+    resume: "Incontournable des pâtisseries et tisanes tunisiennes. Digestif et adoucissant pour la toux.",
+    u: [
+      ["ballonnements", "Infusion : 1 c. à café de graines écrasées par tasse, 10 min, après le repas.", "r"],
+      ["toux", "Même infusion, 3 tasses par jour, avec du miel.", "r"],
+      ["bronches", "Même infusion (expectorant doux).", "r"],
+      ["allaitement", "Usage traditionnel en infusion — demander l'avis de la sage-femme.", "t"]
+    ],
+    prec: ["Huile essentielle : uniquement sur avis médical ; déconseillée pendant la grossesse.", "Allergie possible (personnes allergiques au céleri, à la carotte)."],
+    src: ["L", "D"] },
+
+  { id: "carvi", fr: "Carvi", lat: "Carum carvi", fam: "Apiacées", ar: "كروية", dj: "Karouia", dispo: ["C", "M", "H"],
+    parties: "Graines",
+    resume: "Épice emblématique de la cuisine tunisienne (tabel-karouia). Excellent contre les gaz et coliques.",
+    u: [
+      ["ballonnements", "Infusion : 1–2 c. à café de graines écrasées par tasse, 10 min, entre les repas, 2–3 fois par jour.", "r"],
+      ["crampesVentre", "Même infusion (antispasmodique) ; ou mâcher ½ c. à café de graines.", "r"],
+      ["appetit", "1 petite tasse avant le repas.", "r"]
+    ],
+    prec: ["Bien toléré aux doses culinaires et en tisane.", "Huile essentielle : usage interne uniquement sous contrôle médical.", "Prudence en cas de maladie inflammatoire des reins."],
+    src: ["L", "D"] },
+
+  { id: "cumin", fr: "Cumin", lat: "Cuminum cyminum", fam: "Apiacées", ar: "كمون", dj: "Kammoun", dispo: ["C", "M", "H"],
+    parties: "Graines",
+    resume: "Épice digestive du quotidien, notamment avec les légumineuses.",
+    u: [
+      ["ballonnements", "Infusion : ½ à 1 c. à café de graines par tasse, 10 min, après le repas ; ou cumin ajouté aux plats de pois chiches, fèves, lentilles.", "t"],
+      ["diarrhee", "Traditionnellement, eau de cumin (graines bouillies 5 min) en petites quantités — boire surtout beaucoup.", "t"],
+      ["indigestion", "Même infusion.", "t"]
+    ],
+    prec: ["Sans danger aux doses culinaires.", "Éviter les fortes doses pendant la grossesse."],
+    src: ["L", "D"] },
+
+  { id: "coriandre", fr: "Coriandre", lat: "Coriandrum sativum", fam: "Apiacées", ar: "تابل / قصبر", dj: "Tabel (graines) / Kosbor (feuilles)", dispo: ["C", "M", "H"],
+    parties: "Graines, feuilles",
+    resume: "Le « tabel » des épices tunisiennes. Les graines aident à digérer.",
+    u: [
+      ["indigestion", "Infusion : 1–2 c. à café de graines écrasées par tasse, 10 min, jusqu'à 3 fois par jour.", "r"],
+      ["ballonnements", "Même infusion.", "r"],
+      ["appetit", "1 petite tasse avant le repas.", "r"]
+    ],
+    prec: ["Bien tolérée aux doses habituelles.", "Allergie possible (famille du céleri)."],
+    src: ["L", "D"] },
+
+  { id: "aneth", fr: "Aneth", lat: "Anethum graveolens", fam: "Apiacées", ar: "شبت", dj: "Chebt", dispo: ["C", "M"],
+    parties: "Graines, feuilles",
+    resume: "Cousin du fenouil, aux usages digestifs proches ; doux pour les coliques.",
+    u: [
+      ["ballonnements", "Infusion : 1–2 c. à café de graines écrasées par tasse, 10 min ; ou mâcher ½ c. à café de graines.", "r"],
+      ["crampesVentre", "Même infusion.", "r"],
+      ["regles", "Infusion de graines, 2–3 tasses par jour (usage traditionnel indien rapporté par l'OMS pour l'aneth de l'Inde).", "t"],
+      ["haleine", "Mâcher quelques graines.", "t"]
+    ],
+    prec: ["Bien toléré en tisane.", "Graines à doses élevées déconseillées pendant la grossesse."],
+    src: ["L", "D", "O"] },
+
+  { id: "persil", fr: "Persil", lat: "Petroselinum crispum", fam: "Apiacées", ar: "معدنوس", dj: "Maâdnous", dispo: ["C", "M"],
+    parties: "Feuilles, racine",
+    resume: "Herbe du quotidien, diurétique : utilisé traditionnellement pour « laver » les reins.",
+    u: [
+      ["urinaire", "Infusion : 1–2 c. à café de feuilles séchées (ou une poignée de frais) par tasse, 10 min, 2–3 tasses par jour, en buvant beaucoup d'eau.", "r"],
+      ["calculs", "Même infusion pour augmenter le volume d'urine (prévention des petits calculs) — sur avis médical.", "r"],
+      ["haleine", "Mâcher des feuilles fraîches (surtout après l'ail).", "t"]
+    ],
+    prec: ["Contre-indiqué à doses médicinales pendant la grossesse (l'apiol des graines et de l'huile est abortif) et en cas de maladie des reins (néphrite).", "Ne jamais utiliser les graines ni l'huile essentielle sans avis médical."],
+    src: ["L", "D"] },
+
+  { id: "celeri", fr: "Céleri", lat: "Apium graveolens", fam: "Apiacées", ar: "كرافس", dj: "Krafes", dispo: ["C", "M"],
+    parties: "Graines, feuilles, tige",
+    resume: "Légume et plante diurétique, traditionnellement utilisée contre les douleurs articulaires.",
+    u: [
+      ["articulations", "Infusion de graines : 1 c. à café de graines écrasées par tasse, 10 min, 2 tasses par jour (rhumatismes, goutte).", "t"],
+      ["urinaire", "Même infusion (diurétique).", "t"],
+      ["tension", "Le céleri (jus ou légume) est étudié pour la tension — en complément de l'alimentation, jamais à la place d'un traitement.", "r"]
+    ],
+    prec: ["Déconseillé (graines) pendant la grossesse et en cas de maladie des reins.", "Allergie possible, parfois sévère.", "Photosensibilisant : éviter le soleil après contact important avec la plante."],
+    src: ["L", "D"] },
+
+  { id: "khella", fr: "Khella (herbe aux cure-dents)", lat: "Ammi visnaga (syn. Visnaga daucoides)", fam: "Apiacées", ar: "خلة / بشنيخة", dj: "Khella / Bechnikha", verif: true, dispo: ["S", "H"],
+    parties: "Fruits (graines)",
+    resume: "Plante d'Afrique du Nord et d'Égypte, puissant relaxant des muscles des voies urinaires et des bronches. À n'utiliser qu'avec un avis médical.",
+    u: [
+      ["calculs", "Traditionnellement : infusion légère (½ c. à café de graines par tasse) pour aider l'évacuation des petits calculs — uniquement sur avis médical.", "t"]
+    ],
+    prec: ["Plante active : ne pas utiliser sans avis médical, pas d'usage prolongé.", "Effets indésirables possibles : nausées, vertiges, insomnie, atteinte du foie (jaunisse), sensibilisation au soleil.", "Interdite pendant la grossesse et l'allaitement."],
+    src: ["L", "D"] },
+
+  // ===================== Épices
+  { id: "gingembre", fr: "Gingembre", lat: "Zingiber officinale", fam: "Zingibéracées", ar: "زنجبيل", dj: "Skinjbir", dispo: ["M", "H"],
+    parties: "Rhizome (racine)",
+    resume: "Épice des souks, référence scientifique contre les nausées. Réchauffant en cas de rhume.",
+    u: [
+      ["nausees", "Infusion : 2–3 fines rondelles de gingembre frais (≈ 3 g) dans une tasse d'eau bouillante, 10 min ; 1 tasse jusqu'à 3 fois par jour. Mal des transports : 1 tasse 30 min avant le départ.", "r"],
+      ["rhume", "Même infusion avec citron et miel ; ou mélange OMS « trikatu » : gingembre, poivre noir et poivre long à parts égales, 2 g dans du miel ou du lait chaud, 3 fois par jour.", "r"],
+      ["indigestion", "1 tasse d'infusion après le repas.", "r"],
+      ["fievre", "Infusion chaude pour favoriser la transpiration dans les états grippaux.", "r"],
+      ["regles", "Infusion de gingembre frais, 2–3 tasses par jour pendant les règles.", "t"]
+    ],
+    prec: ["À éviter en cas d'ulcère de l'estomac.", "Grossesse : pas plus de doses alimentaires sans avis médical.", "Prudence avec les anticoagulants et avant une opération (fluidifie légèrement le sang)."],
+    src: ["L", "D", "O"] },
+
+  { id: "curcuma", fr: "Curcuma", lat: "Curcuma longa", fam: "Zingibéracées", ar: "كركم", dj: "Kourkoum", dispo: ["M", "H", "P"],
+    parties: "Rhizome (poudre)",
+    resume: "Épice jaune anti-inflammatoire. L'OMS décrit son usage en pâte sur les entorses.",
+    u: [
+      ["muscles", "Entorse / foulure (OMS) : pâte de poudre de curcuma mélangée à un peu d'eau tiède, appliquée en couche sur la zone 2 fois par jour, couverte d'un linge.", "r"],
+      ["articulations", "En cuisine : 1–2 c. à café par jour avec une pincée de poivre noir et un corps gras (meilleure absorption).", "r"],
+      ["indigestion", "½ c. à café dans un verre de lait chaud ou d'eau tiède après le repas.", "r"],
+      ["plaies", "OMS : lavage des petites plaies avec une décoction (10 g de poudre bouillis dans 200 ml d'eau, refroidie).", "t"]
+    ],
+    prec: ["Contre-indiqué en cas de calculs ou d'obstruction des voies biliaires, d'ulcère ou d'hyperacidité.", "Compléments concentrés : prudence avec les anticoagulants ; femmes enceintes et enfants seulement sur avis médical.", "Tache durablement les tissus et la peau."],
+    src: ["L", "D", "O"] },
+
+  { id: "cannelle", fr: "Cannelle", lat: "Cinnamomum verum (syn. C. zeylanicum)", fam: "Lauracées", ar: "قرفة", dj: "Qarfa", dispo: ["M", "H"],
+    parties: "Écorce",
+    resume: "Écorce réchauffante et digestive, très présente dans les boissons d'hiver tunisiennes.",
+    u: [
+      ["ballonnements", "Décoction : 1 bâton (≈ 1–2 g) dans une tasse d'eau, 5 min d'ébullition ; après le repas.", "r"],
+      ["rhume", "Même décoction avec gingembre, citron et miel.", "r"],
+      ["diarrhee", "Décoction légère, en complément d'une bonne hydratation.", "t"],
+      ["glycemie", "Usage alimentaire étudié (½ c. à café par jour) — en complément seulement, en parlant à votre médecin.", "t"]
+    ],
+    prec: ["Ne pas dépasser 2–4 g d'écorce par jour, pas d'usage prolongé à fortes doses.", "La cannelle « casse » (cassia, la plus vendue) est riche en coumarine, toxique pour le foie à forte dose : préférer la cannelle de Ceylan.", "Grossesse : doses culinaires seulement. Allergie possible.", "Huile essentielle : jamais sans avis médical."],
+    src: ["L", "D"] },
+
+  { id: "girofle", fr: "Clou de girofle", lat: "Syzygium aromaticum (syn. Eugenia caryophyllata)", fam: "Myrtacées", ar: "قرنفل", dj: "Qronfel", dispo: ["M", "H", "P"],
+    parties: "Boutons floraux séchés (clous), huile essentielle",
+    resume: "Remède de grand-mère des rages de dents, confirmé par l'OMS : l'eugénol est anesthésiant et antiseptique.",
+    u: [
+      ["dents", "OMS : déposer 1 goutte d'huile de girofle sur un petit coton et le placer sur la dent douloureuse (éviter le contact avec la langue et la gencive), 2–3 fois par jour. À défaut, placer un clou contre la dent.", "r"],
+      ["haleine", "Mâcher un clou de girofle.", "r"],
+      ["gencives", "Bain de bouche : infusion de 3–4 clous dans une tasse d'eau bouillante, refroidie.", "r"],
+      ["ballonnements", "1–2 clous dans une infusion ou un thé après le repas.", "t"]
+    ],
+    prec: ["L'huile essentielle est irritante : jamais pure sur les muqueuses en grande quantité, jamais à avaler, jamais chez l'enfant.", "Soulage en attendant le dentiste mais ne soigne pas la carie.", "Prudence avec les anticoagulants (eugénol)."],
+    src: ["L", "D", "O"] },
+
+  { id: "cardamome", fr: "Cardamome", lat: "Elettaria cardamomum", fam: "Zingibéracées", ar: "هيل / قاقلة", dj: "Hil / Kakoula", dispo: ["M", "H"],
+    parties: "Graines",
+    resume: "Épice parfumée du café et du thé. L'OMS la propose contre les nausées et vomissements.",
+    u: [
+      ["nausees", "OMS : poudre de graines (2–3 pincées, 250–500 mg) avec un peu d'eau tiède ou de miel, 2–3 fois par jour, à jeun ou 30 min avant le repas (enfant : 60–120 mg).", "r"],
+      ["indigestion", "Infusion : 3–4 gousses écrasées par tasse, 10 min.", "r"],
+      ["haleine", "Mâcher 1–2 graines.", "t"]
+    ],
+    prec: ["Très bien tolérée.", "Calculs biliaires : demander l'avis du médecin (peut déclencher une colique)."],
+    src: ["L", "D", "O"] },
+
+  { id: "poivre", fr: "Poivre noir", lat: "Piper nigrum", fam: "Pipéracées", ar: "فلفل أكحل", dj: "Felfel akhal", dispo: ["M"],
+    parties: "Baies séchées (grains)",
+    resume: "Épice réchauffante, composant du mélange « trikatu » décrit par l'OMS contre le rhume.",
+    u: [
+      ["rhume", "Trikatu (OMS) : gingembre sec, poivre noir et poivre long en poudre, parts égales ; 2 g avec du miel ou bouilli quelques minutes dans du lait, 3 fois par jour.", "r"],
+      ["appetit", "Une pincée dans les plats stimule la digestion.", "t"]
+    ],
+    prec: ["Déconseillé à doses médicinales pendant la grossesse.", "Irritant en cas d'ulcère ou d'hémorroïdes."],
+    src: ["L", "D", "O"] },
+
+  { id: "piment", fr: "Piment", lat: "Capsicum frutescens / C. annuum", fam: "Solanacées", ar: "فلفل حار", dj: "Felfel har", dispo: ["C", "M"],
+    parties: "Fruits",
+    resume: "La base de la harissa. En application, la capsaïcine calme durablement certaines douleurs.",
+    u: [
+      ["muscles", "Pommade ou huile au piment (en pharmacie) ou macérat maison : 1 c. à café de poudre dans 100 ml d'huile d'olive chauffée doucement 1 h au bain-marie, filtrée. Masser localement.", "r"],
+      ["articulations", "Même application sur les articulations douloureuses (arthrose), 2–3 fois par jour.", "r"]
+    ],
+    prec: ["Jamais sur une peau abîmée, près des yeux ou des muqueuses ; se laver les mains après usage.", "Usage externe : pas plus de 2 jours d'affilée puis 2 semaines de pause (Commission E).", "Par voie interne, irrite l'estomac en cas d'ulcère, de reflux ou d'hémorroïdes."],
+    src: ["L", "D"] },
+
+  { id: "nigelle", fr: "Nigelle (cumin noir)", lat: "Nigella sativa", fam: "Renonculacées", ar: "حبة البركة / سانوج", dj: "Sanouj", dispo: ["C", "M", "H"],
+    parties: "Graines, huile",
+    resume: "« Habbet el baraka », très utilisée au Maghreb et au Moyen-Orient. Digestive et traditionnellement employée pour les voies respiratoires.",
+    u: [
+      ["ballonnements", "½ c. à café de graines dans les plats ou dans une infusion, après le repas.", "t"],
+      ["rhume", "Respirer des graines tiédies et écrasées dans un linge, ou ½ c. à café de graines avec du miel.", "t"],
+      ["toux", "½ c. à café de graines moulues dans une c. à soupe de miel, 2 fois par jour.", "t"],
+      ["peauIrritee", "Huile de nigelle en application locale sur la peau sèche.", "t"]
+    ],
+    prec: ["Déconseillée à doses médicinales pendant la grossesse.", "Huile pure : peut provoquer des réactions cutanées ; tester d'abord sur une petite zone.", "Peut renforcer l'effet des traitements du diabète et de la tension."],
+    src: ["L", "D"] },
+
+  { id: "fenugrec", fr: "Fenugrec", lat: "Trigonella foenum-graecum", fam: "Fabacées", ar: "حلبة", dj: "Helba", dispo: ["C", "M", "H"],
+    parties: "Graines",
+    resume: "La « helba » tunisienne : graines riches en mucilages, réputées pour l'appétit, la glycémie et le cholestérol.",
+    u: [
+      ["appetit", "1 c. à café de graines dans une tasse d'eau, faire bouillir 5 min ; 1 tasse avant le repas (goût prononcé).", "r"],
+      ["glycemie", "5–10 g de graines (trempées la nuit) par jour ont montré un effet modeste — uniquement en complément et en surveillant sa glycémie avec son médecin.", "r"],
+      ["cholesterol", "Même usage, en complément d'une alimentation équilibrée.", "r"],
+      ["constipation", "Graines trempées avalées avec un grand verre d'eau (mucilages).", "r"],
+      ["peauIrritee", "Cataplasme : graines moulues mélangées à de l'eau chaude, appliquées tièdes sur furoncles et peau irritée.", "r"]
+    ],
+    prec: ["Déconseillé pendant la grossesse (stimule l'utérus).", "Risque d'hypoglycémie associé aux médicaments du diabète : en parler au médecin.", "Allergie possible (pois chiche, arachide). Peut donner une odeur à la sueur et aux urines."],
+    src: ["L", "D"] },
+
+  { id: "sesame", fr: "Sésame", lat: "Sesamum indicum", fam: "Pédaliacées", ar: "جلجلان", dj: "Jeljlen", dispo: ["C", "M"],
+    parties: "Graines, huile",
+    resume: "Graines nourrissantes et légèrement laxatives ; huile adoucissante pour la peau.",
+    u: [
+      ["constipation", "1–2 c. à soupe de graines moulues par jour dans l'alimentation, avec de l'eau.", "t"],
+      ["peauIrritee", "Huile de sésame en massage sur la peau sèche.", "t"]
+    ],
+    prec: ["Allergie au sésame parfois grave : à éviter chez les personnes allergiques."],
+    src: ["L", "D"] },
+
+  // ===================== Potager
+  { id: "ail", fr: "Ail", lat: "Allium sativum", fam: "Alliacées", ar: "ثوم", dj: "Thoum", dispo: ["C", "M"],
+    parties: "Gousses (bulbe)",
+    resume: "« La plante médicinale par excellence » pour le Larousse : antibactérien, bon pour la circulation et les infections ORL.",
+    u: [
+      ["rhume", "1 à 2 gousses crues par jour, écrasées dans du miel ou une cuillère d'huile d'olive.", "r"],
+      ["toux", "Sirop : gousses émincées recouvertes de miel, laisser reposer une nuit ; 1 c. à café 3 fois par jour.", "r"],
+      ["bronches", "Même sirop ; ail dans l'alimentation.", "r"],
+      ["cholesterol", "1 gousse crue par jour dans l'alimentation (effet modeste), en complément d'une bonne hygiène de vie.", "r"],
+      ["tension", "Usage alimentaire régulier — en complément du traitement, jamais à la place.", "r"],
+      ["mycoses", "Pied d'athlète : bain de pieds avec de l'ail écrasé dans de l'eau tiède (jamais d'ail pur sur la peau).", "r"]
+    ],
+    prec: ["Fluidifie le sang : prudence avec les anticoagulants et avant une opération.", "Plus de 5 gousses par jour : gaz, brûlures d'estomac.", "Ail cru appliqué sur la peau : risque de brûlure.", "Diminue l'effet de certains médicaments (ex. contre le VIH)."],
+    src: ["L", "D"] },
+
+  { id: "oignon", fr: "Oignon", lat: "Allium cepa", fam: "Alliacées", ar: "بصل", dj: "Bsal", dispo: ["C", "M"],
+    parties: "Bulbe",
+    resume: "Proche de l'ail : sirop d'oignon contre la toux, usage alimentaire bon pour le cœur.",
+    u: [
+      ["toux", "Sirop : un oignon émincé recouvert de miel (ou de sucre) une nuit ; 1 c. à soupe du jus obtenu 3–4 fois par jour.", "r"],
+      ["rhume", "Même sirop ; soupe d'oignon chaude.", "r"],
+      ["insectes", "Frotter la piqûre avec une rondelle d'oignon cru.", "t"],
+      ["cholesterol", "Consommation régulière dans l'alimentation.", "r"]
+    ],
+    prec: ["Aliment sûr. Allergies rares.", "Le sirop au miel ne doit pas être donné aux bébés de moins de 1 an (miel)."],
+    src: ["L", "D"] },
+
+  { id: "artichaut", fr: "Artichaut", lat: "Cynara scolymus", fam: "Astéracées", ar: "قنارية", dj: "Guennaria", dispo: ["C", "M", "P"],
+    parties: "Feuilles (amères), capitule",
+    resume: "La Tunisie en est un grand producteur. Les feuilles amères soutiennent le foie et la digestion des graisses.",
+    u: [
+      ["foie", "Infusion de feuilles séchées : 1 c. à café par tasse, 10 min, avant les repas (très amère). Ou extrait en pharmacie.", "r"],
+      ["indigestion", "Même infusion, 2–3 tasses par jour.", "r"],
+      ["cholesterol", "Extrait de feuilles (pharmacie) : effet modeste étudié, en complément.", "r"]
+    ],
+    prec: ["Contre-indiqué en cas de calculs ou d'obstruction des voies biliaires.", "Allergie possible chez les personnes allergiques aux Astéracées (camomille, arnica…)."],
+    src: ["L", "D"] },
+
+  // ===================== Arbres & fruits méditerranéens
+  { id: "olivier", fr: "Olivier", lat: "Olea europaea", fam: "Oléacées", ar: "زيتون", dj: "Zitoun", dispo: ["S", "C", "M", "H"],
+    parties: "Feuilles, huile",
+    resume: "L'arbre de la Tunisie. Les feuilles sont traditionnellement utilisées pour la tension et la glycémie ; l'huile adoucit la peau et le transit.",
+    u: [
+      ["tension", "Décoction : 1 c. à soupe de feuilles séchées par tasse, bouillir 5 min ; 2 tasses par jour — en complément et sous surveillance médicale.", "t"],
+      ["glycemie", "Même décoction (usage traditionnel) — ne remplace pas le traitement, risque d'hypoglycémie associé.", "t"],
+      ["constipation", "1 c. à soupe d'huile d'olive à jeun, éventuellement avec du jus de citron.", "t"],
+      ["peauIrritee", "Huile d'olive sur peau sèche, gerçures ; base des huiles de massage.", "t"],
+      ["cheveux", "Bain d'huile tiède sur cheveux secs 30 min avant le shampoing.", "t"]
+    ],
+    prec: ["Les feuilles peuvent faire baisser la tension et la glycémie : prudence si vous êtes déjà traité.", "Huile en grande quantité : peut déclencher une colique en cas de calculs biliaires."],
+    src: ["L", "D"] },
+
+  { id: "figuier", fr: "Figuier", lat: "Ficus carica", fam: "Moracées", ar: "شجرة الكرموس", dj: "Karmous", dispo: ["S", "C", "M"],
+    parties: "Fruits (frais ou secs)",
+    resume: "Les figues sèches de Djebba ou du Sahel : laxatif doux et adoucissant de la toux.",
+    u: [
+      ["constipation", "3–4 figues sèches trempées une nuit dans l'eau, mangées à jeun avec l'eau de trempage.", "t"],
+      ["toux", "Décoction de figues sèches (4–5 figues dans 500 ml d'eau, 15 min), à boire chaude.", "t"],
+      ["peauIrritee", "Furoncle : cataplasme de figue sèche chauffée dans du lait.", "t"]
+    ],
+    prec: ["Le latex (lait blanc) des feuilles et des figues vertes irrite la peau et sensibilise au soleil : ne pas l'appliquer (contrairement à certaines croyances sur les verrues)."],
+    src: ["L", "D"] },
+
+  { id: "grenadier", fr: "Grenadier", lat: "Punica granatum", fam: "Lythracées", ar: "رمان", dj: "Rommen", dispo: ["C", "M", "H"],
+    parties: "Fruit, écorce du fruit (« qochra »)",
+    resume: "La grenade de Gabès ou de Testour. L'écorce du fruit, très astringente, est un remède traditionnel de la diarrhée et des gencives.",
+    u: [
+      ["diarrhee", "Décoction d'écorce de fruit séchée : 1 c. à café d'écorce en morceaux dans une tasse d'eau, bouillir 10 min ; 1–2 tasses par jour, 2 jours maximum, en plus de la réhydratation.", "t"],
+      ["gencives", "Bain de bouche ou gargarisme avec la même décoction refroidie.", "t"],
+      ["gorge", "Gargarisme avec la décoction d'écorce.", "t"],
+      ["cholesterol", "Jus de grenade dans l'alimentation (études encourageantes).", "r"]
+    ],
+    prec: ["Seule l'écorce du fruit s'emploie en tisane : l'écorce des racines et du tronc est toxique (alcaloïdes) — ne pas utiliser.", "Pas d'usage prolongé de l'écorce. Pas chez l'enfant sans avis médical.", "Le jus peut interagir avec certains médicaments (comme le pamplemousse)."],
+    src: ["L", "D"] },
+
+  { id: "caroubier", fr: "Caroubier", lat: "Ceratonia siliqua", fam: "Fabacées", ar: "خروب", dj: "Kharroub", dispo: ["S", "C", "M"],
+    parties: "Gousses (pulpe, farine)",
+    resume: "Arbre typique du Nord tunisien. La farine de caroube est un remède reconnu de la diarrhée, y compris chez l'enfant.",
+    u: [
+      ["diarrhee", "Farine de caroube : 1 c. à soupe (adulte) dans de l'eau, de la compote ou du yaourt, 2–3 fois par jour, avec une bonne hydratation.", "r"],
+      ["acidite", "Farine de caroube délayée dans un peu d'eau (épaississant utilisé contre les régurgitations du nourrisson, sur avis du pédiatre).", "t"]
+    ],
+    prec: ["Très sûre (aliment).", "Diarrhée de l'enfant : la priorité est la réhydratation (soluté de réhydratation orale) et l'avis du médecin."],
+    src: ["L", "D"] },
+
+  { id: "hindi", fr: "Figuier de Barbarie", lat: "Opuntia ficus-indica", fam: "Cactacées", ar: "هندي", dj: "Hindi / Karmous el hindi", dispo: ["S", "C", "M"],
+    parties: "Fleurs, raquettes, fruits ; huile de pépins",
+    resume: "Omniprésent dans le centre tunisien (Kasserine, Sidi Bouzid). Fleurs astringentes et raquettes adoucissantes.",
+    u: [
+      ["diarrhee", "Infusion de fleurs séchées : 1 c. à soupe par tasse, 10 min, 2–3 tasses par jour.", "t"],
+      ["urinaire", "Même infusion de fleurs, traditionnellement diurétique.", "t"],
+      ["plaies", "Raquette débarrassée de ses épines, fendue et chauffée, appliquée en cataplasme sur une contusion ou un abcès.", "t"],
+      ["peauIrritee", "Huile de pépins de figue de Barbarie (vendue en Tunisie) pour les peaux sèches.", "t"]
+    ],
+    prec: ["Attention aux petites épines (glochides) très irritantes.", "Les fruits en excès (pépins) peuvent provoquer une constipation."],
+    src: ["L", "D"] },
+
+  { id: "citronnier", fr: "Citronnier", lat: "Citrus limon", fam: "Rutacées", ar: "قارص / ليمون", dj: "Gares", dispo: ["C", "M"],
+    parties: "Fruit (jus, zeste)",
+    resume: "Riche en vitamine C, antiseptique : compagnon de toutes les tisanes d'hiver.",
+    u: [
+      ["rhume", "Jus d'½ citron dans une tasse d'eau chaude avec 1 c. à café de miel, 2–3 fois par jour.", "t"],
+      ["gorge", "Même boisson, ou gargarisme à l'eau tiède citronnée.", "t"],
+      ["fievre", "Boisson citronnée chaude pour s'hydrater.", "t"],
+      ["insectes", "Frotter une piqûre avec un quartier de citron.", "t"]
+    ],
+    prec: ["Acide : à limiter en cas de reflux ou d'ulcère ; se rincer la bouche (émail dentaire).", "Zeste et huile essentielle photosensibilisants : pas de soleil après application sur la peau."],
+    src: ["L", "D"] },
+
+  { id: "bigaradier", fr: "Bigaradier (fleur d'oranger)", lat: "Citrus aurantium", fam: "Rutacées", ar: "نارنج / زهر", dj: "Narenj / Zhar", dispo: ["C", "M", "H"],
+    parties: "Fleurs (eau de fleur d'oranger, néroli), feuilles, écorce",
+    resume: "Spécialité du Cap Bon (Nabeul) : l'eau de zhar distillée est le calmant doux traditionnel des familles tunisiennes.",
+    u: [
+      ["stress", "1 c. à soupe d'eau de fleur d'oranger dans un verre d'eau ou une tisane, 1–2 fois par jour.", "t"],
+      ["sommeil", "Même usage le soir ; infusion de feuilles (1 c. à soupe par tasse).", "t"],
+      ["appetit", "Écorce amère en infusion avant le repas.", "r"],
+      ["crampesVentre", "Eau de zhar dans une infusion tiède après le repas.", "t"]
+    ],
+    prec: ["Eau de fleur d'oranger : sûre aux doses alimentaires.", "Les extraits concentrés d'écorce (synéphrine, compléments « minceur ») sont déconseillés en cas de maladie cardiaque ou d'hypertension.", "Photosensibilisation possible (écorce, huile essentielle)."],
+    src: ["L", "D"] },
+
+  { id: "myrte", fr: "Myrte", lat: "Myrtus communis", fam: "Myrtacées", ar: "ريحان", dj: "Rihan", dispo: ["S", "C", "H"],
+    parties: "Feuilles, baies",
+    resume: "Arbuste des forêts de Kroumirie et du Cap Bon, au parfum frais. Antiseptique et astringent.",
+    u: [
+      ["bronches", "Infusion de feuilles : 1 c. à café par tasse, 10 min, 2–3 tasses par jour ; ou inhalation de feuilles.", "t"],
+      ["diarrhee", "Infusion de feuilles ou décoction de baies (astringentes).", "t"],
+      ["plaies", "Lavage avec une infusion forte refroidie.", "t"],
+      ["cheveux", "Rinçage avec une décoction de feuilles (tradition maghrébine).", "t"]
+    ],
+    prec: ["Huile essentielle : jamais en usage interne sans surveillance médicale.", "Fortes doses : nausées, vomissements, diarrhée."],
+    src: ["L", "D"] },
+
+  { id: "lentisque", fr: "Lentisque (pistachier lentisque)", lat: "Pistacia lentiscus", fam: "Anacardiacées", ar: "ضرو", dj: "Dharw", dispo: ["S", "H"],
+    parties: "Feuilles, huile des baies (« zit dharw »), résine (mastic)",
+    resume: "Arbuste très commun dans le maquis du Nord tunisien. L'huile de baies est un remède traditionnel tunisien des brûlures et de la toux.",
+    u: [
+      ["brulures", "Huile de lentisque en fine couche sur une brûlure légère déjà refroidie (usage traditionnel tunisien).", "t"],
+      ["gencives", "Mâcher de la résine (mastic) ou bain de bouche avec une décoction de feuilles.", "t"],
+      ["toux", "Traditionnellement, quelques gouttes d'huile de lentisque dans une cuillère de miel.", "t"],
+      ["acidite", "Résine de mastic (gomme) : usage traditionnel méditerranéen pour l'estomac.", "t"]
+    ],
+    prec: ["Usage interne : prudence, pas pendant la grossesse sans avis médical.", "Tester l'huile sur une petite zone (allergies possibles)."],
+    src: ["L", "D"] },
+
+  { id: "laurier", fr: "Laurier noble", lat: "Laurus nobilis", fam: "Lauracées", ar: "رند", dj: "Rand", dispo: ["S", "C", "M"],
+    parties: "Feuilles",
+    resume: "Le laurier-sauce, digestif. À ne pas confondre avec le laurier-rose (defla), très toxique !",
+    u: [
+      ["indigestion", "Infusion : 2–3 feuilles par tasse, 10 min, après le repas.", "t"],
+      ["ballonnements", "Même infusion ; feuilles dans les plats de légumineuses.", "t"],
+      ["articulations", "Huile de macération de feuilles en massage.", "t"]
+    ],
+    prec: ["Ne jamais confondre avec le laurier-rose (Nerium oleander, « defla »), mortel.", "Huile essentielle : jamais en usage interne ni pure sur la peau (allergies)."],
+    src: ["L", "D"] },
+
+  { id: "eucalyptus", fr: "Eucalyptus", lat: "Eucalyptus globulus", fam: "Myrtacées", ar: "كالبتوس", dj: "Kalitous", dispo: ["C", "M", "H"],
+    parties: "Feuilles",
+    resume: "Planté partout en Tunisie. Ses feuilles en inhalation dégagent les voies respiratoires.",
+    u: [
+      ["rhume", "Inhalation : une poignée de feuilles dans un bol d'eau bouillante, respirer 10 min sous une serviette, 2 fois par jour.", "r"],
+      ["bronches", "Même inhalation ; ou infusion : 1 c. à café de feuilles séchées par tasse, 10 min, 2 tasses par jour.", "r"],
+      ["toux", "Même infusion avec du miel.", "r"],
+      ["fievre", "Infusion chaude en cas d'état grippal.", "r"]
+    ],
+    prec: ["Huile essentielle : jamais près du nez ou du visage des bébés et jeunes enfants (risque de spasme respiratoire), jamais avalée pure.", "Déconseillé en cas d'inflammation du foie, de l'estomac ou des voies biliaires.", "Inhalations : pas chez l'enfant de moins de 6 ans ni en cas d'asthme sans avis médical."],
+    src: ["L", "D"] },
+
+  { id: "coing", fr: "Cognassier", lat: "Cydonia oblonga", fam: "Rosacées", ar: "سفرجل", dj: "Sfarjel", dispo: ["C", "M"],
+    parties: "Fruit, pépins",
+    resume: "Le coing, astringent, calme la diarrhée ; ses pépins donnent un mucilage adoucissant.",
+    u: [
+      ["diarrhee", "Coing cuit (compote, pâte de coing) ou décoction du fruit en morceaux.", "t"],
+      ["gorge", "Mucilage : 1 c. à café de pépins entiers dans un verre d'eau tiède 30 min, en gargarisme ou à boire.", "t"],
+      ["brulures", "Le même mucilage en application sur la peau irritée ou les lèvres gercées.", "t"]
+    ],
+    prec: ["Ne jamais écraser ni mâcher les pépins (libèrent des composés cyanés) : les utiliser entiers.", "Huile essentielle : pas d'usage interne sans contrôle médical."],
+    src: ["L", "D"] },
+
+  { id: "aubepine", fr: "Aubépine / azerolier", lat: "Crataegus spp. (C. monogyna, C. azarolus)", fam: "Rosacées", ar: "زعرور", dj: "Zaârour", dispo: ["S", "C", "H", "P"],
+    parties: "Sommités fleuries, fruits",
+    resume: "L'aubépine pousse dans le Nord-Ouest, l'azerolier est cultivé. Plante du cœur et des palpitations nerveuses.",
+    u: [
+      ["stress", "Infusion de sommités fleuries : 1 c. à café par tasse, 10 min, 2–3 tasses par jour (palpitations, nervosité).", "r"],
+      ["sommeil", "1 tasse le soir.", "t"],
+      ["tension", "Utilisée en phytothérapie pour la tension et le cœur — uniquement sous surveillance médicale.", "r"]
+    ],
+    prec: ["Ne pas utiliser seule pour un problème cardiaque : avis médical obligatoire.", "Peut renforcer l'effet des médicaments du cœur (digitaliques) et de la tension.", "Pas d'automédication en cas de douleur thoracique : appeler le 190."],
+    src: ["L", "D"] },
+
+  { id: "henne", fr: "Henné", lat: "Lawsonia inermis", fam: "Lythracées", ar: "حنة", dj: "Hanna", dispo: ["C", "M", "H"],
+    parties: "Feuilles (poudre)",
+    resume: "Le henné de Gabès : colorant traditionnel, astringent et antifongique en usage externe.",
+    u: [
+      ["cheveux", "Pâte de poudre de henné et d'eau tiède, posée 1–2 h sur les cheveux : fortifie et colore.", "t"],
+      ["mycoses", "Pâte de henné appliquée sur les pieds (traditionnellement contre la transpiration et les champignons).", "t"],
+      ["peauIrritee", "Application sur les petites fissures des talons et des mains.", "t"]
+    ],
+    prec: ["Usage externe uniquement.", "Éviter le « henné noir » (contient de la PPD, allergène grave).", "Dangereux chez les bébés atteints de déficit en G6PD (favisme) : pas de henné chez le nourrisson."],
+    src: ["L", "D"] },
+
+  { id: "aloes", fr: "Aloès (aloe vera)", lat: "Aloe vera", fam: "Asphodélacées", ar: "صبر", dj: "Sabra", dispo: ["C", "M", "P"],
+    parties: "Gel des feuilles (usage externe) ; suc jaune (laxatif)",
+    resume: "Cultivé dans les jardins tunisiens. Le gel transparent est le remède des brûlures et coups de soleil.",
+    u: [
+      ["brulures", "Couper une feuille, appliquer le gel transparent sur la brûlure légère ou le coup de soleil, 3–4 fois par jour.", "r"],
+      ["peauIrritee", "Même gel sur peau irritée, eczéma léger, psoriasis.", "r"],
+      ["plaies", "Gel sur petites écorchures propres.", "t"]
+    ],
+    prec: ["Usage interne du suc jaune (latex) déconseillé : purgatif irritant, interdit pendant la grossesse, l'allaitement et chez l'enfant.", "Bien rincer le gel du latex jaune avant usage sur la peau."],
+    src: ["L", "D"] },
+
+  // ===================== Plantes sauvages
+  { id: "mauve", fr: "Mauve", lat: "Malva sylvestris", fam: "Malvacées", ar: "خبيزة", dj: "Khobbiza", dispo: ["S", "M"],
+    parties: "Fleurs, feuilles",
+    resume: "Pousse partout en hiver et se mange en légume. Ses mucilages adoucissent la gorge et la toux sèche.",
+    u: [
+      ["toux", "Infusion : 1–2 c. à café de fleurs et feuilles séchées par tasse, 10 min, 3 tasses par jour (toux sèche).", "r"],
+      ["gorge", "Même infusion, à boire ou en gargarisme.", "r"],
+      ["constipation", "Feuilles cuites en légume (laxatif doux).", "t"],
+      ["peauIrritee", "Compresses d'infusion tiède sur la peau irritée.", "t"]
+    ],
+    prec: ["Très bien tolérée.", "Les mucilages peuvent ralentir l'absorption des médicaments : les prendre à 1 h d'intervalle."],
+    src: ["L", "D"] },
+
+  { id: "ortie", fr: "Ortie", lat: "Urtica dioica / Urtica urens", fam: "Urticacées", ar: "حريقة", dj: "Horraiga", dispo: ["S", "H"],
+    parties: "Feuilles, racine",
+    resume: "Commune dans les terrains riches du Nord. Feuilles reminéralisantes et diurétiques.",
+    u: [
+      ["urinaire", "Infusion de feuilles : 1–2 c. à café par tasse, 10 min, 3 tasses par jour avec beaucoup d'eau.", "r"],
+      ["calculs", "Même infusion pour augmenter le volume d'urine.", "r"],
+      ["articulations", "Même infusion, en cure de 3 semaines (rhumatismes, goutte).", "r"],
+      ["rhume", "Rhume des foins : infusion de feuilles (effet antiallergique modeste).", "r"]
+    ],
+    prec: ["Ne pas utiliser comme diurétique en cas d'œdèmes dus à une maladie du cœur ou des reins.", "Cueillir avec des gants ; la cuisson ou le séchage supprime les piqûres."],
+    src: ["L", "D"] },
+
+  { id: "bourrache", fr: "Bourrache", lat: "Borago officinalis", fam: "Boraginacées", ar: "لسان الثور", dj: "Lsan ethour", verif: true, dispo: ["S"],
+    parties: "Fleurs ; huile des graines (pharmacie)",
+    resume: "Belle plante sauvage à fleurs bleues. Les feuilles contiennent des alcaloïdes toxiques : seule l'huile de graines est recommandée.",
+    u: [
+      ["peauIrritee", "Huile de bourrache (capsules de pharmacie) pour l'eczéma et la peau sèche.", "t"],
+      ["toux", "Traditionnellement, infusion de fleurs (courte durée seulement).", "t"]
+    ],
+    prec: ["Feuilles et fleurs : alcaloïdes pyrrolizidiniques toxiques pour le foie — pas d'usage prolongé, jamais pendant la grossesse ni l'allaitement.", "Préférer l'huile de graines certifiée sans alcaloïdes."],
+    src: ["L", "D"] },
+
+  { id: "chardonMarie", fr: "Chardon-Marie", lat: "Silybum marianum (syn. Carduus marianus)", fam: "Astéracées", ar: "شوك مريم", dj: "Chouk Meryem", verif: true, dispo: ["S", "H", "P"],
+    parties: "Fruits (graines)",
+    resume: "Grand chardon aux feuilles marbrées de blanc, très commun en Tunisie. Protecteur reconnu du foie.",
+    u: [
+      ["foie", "Graines moulues : 1 c. à café dans les aliments ou en décoction (bouillir 10 min), 3 fois par jour ; ou extrait standardisé (silymarine) en pharmacie.", "r"],
+      ["indigestion", "Même usage après les repas copieux.", "r"]
+    ],
+    prec: ["Bien toléré ; léger effet laxatif possible.", "Allergie possible aux Astéracées.", "Une maladie du foie doit être suivie par un médecin."],
+    src: ["L", "D"] },
+
+  { id: "chiba", fr: "Absinthe (grande absinthe)", lat: "Artemisia absinthium", fam: "Astéracées", ar: "شيبة", dj: "Chiba", dispo: ["C", "M", "H"],
+    parties: "Feuilles et sommités",
+    resume: "La « chiba » ajoutée au thé en hiver en Tunisie. Très amère, digestive, mais contient de la thuyone.",
+    u: [
+      ["appetit", "Une petite pincée (≤ 1 g) dans le thé ou en infusion, avant le repas.", "r"],
+      ["indigestion", "Même infusion légère après le repas.", "r"],
+      ["foie", "Même usage (stimule la bile).", "r"]
+    ],
+    prec: ["Interdite pendant la grossesse et l'allaitement, et chez l'enfant.", "Pas plus de 4 semaines d'affilée ; doses faibles (thuyone toxique pour le système nerveux).", "Contre-indiquée en cas d'ulcère d'estomac et d'épilepsie."],
+    src: ["L", "D"] },
+
+  { id: "psyllium", fr: "Psyllium", lat: "Plantago afra (syn. P. psyllium) · Plantago ovata", fam: "Plantaginacées", ar: "بزر قطونا", dj: "Bezr qatouna", dispo: ["S", "H", "P"],
+    parties: "Graines et téguments",
+    resume: "Plantain méditerranéen présent en Tunisie. Ses graines gonflent dans l'eau : régulateur du transit reconnu.",
+    u: [
+      ["constipation", "1 c. à soupe (5–10 g) de graines ou téguments dans un grand verre d'eau (250 ml), à boire aussitôt, puis un 2e verre d'eau ; 1–3 fois par jour.", "r"],
+      ["diarrhee", "Même usage (absorbe l'eau et régularise les selles).", "r"],
+      ["circulation", "Hémorroïdes : selles plus molles grâce au psyllium, même usage.", "r"],
+      ["cholesterol", "Usage quotidien en complément (effet démontré modeste).", "r"]
+    ],
+    prec: ["Toujours avec beaucoup d'eau (risque d'obstruction sinon).", "Contre-indiqué en cas d'occlusion ou de rétrécissement de l'intestin ou de l'œsophage.", "Prendre les médicaments 1 h avant ou après."],
+    src: ["L", "D"] },
+
+  { id: "plantain", fr: "Plantain", lat: "Plantago major / P. lanceolata", fam: "Plantaginacées", ar: "لسان الحمل", dj: "Lsan el hmel", dispo: ["S"],
+    parties: "Feuilles",
+    resume: "Mauvaise herbe des chemins, premier secours des piqûres et petites plaies.",
+    u: [
+      ["insectes", "Écraser une feuille fraîche et l'appliquer sur la piqûre.", "t"],
+      ["plaies", "Feuilles fraîches lavées et écrasées en cataplasme sur une petite plaie.", "r"],
+      ["gorge", "Infusion de feuilles en gargarisme ou à boire, 2–3 fois par jour.", "r"],
+      ["toux", "Même infusion (toux irritative).", "r"]
+    ],
+    prec: ["Bien toléré. Déconseillé à doses médicinales pendant la grossesse."],
+    src: ["L", "D"] },
+
+  { id: "camomille", fr: "Camomille", lat: "Matricaria recutita (syn. Chamomilla recutita)", fam: "Astéracées", ar: "بابونج", dj: "Babounej", dispo: ["S", "M", "H"],
+    parties: "Capitules floraux",
+    resume: "Une des plantes les mieux étudiées : calmante, digestive, anti-inflammatoire, douce même pour les enfants.",
+    u: [
+      ["crampesVentre", "Infusion : 1 c. à soupe de fleurs (≈ 3 g) par tasse, 10 min à couvert, 3–4 fois par jour.", "r"],
+      ["sommeil", "1 tasse le soir.", "r"],
+      ["stress", "Même infusion, 2–3 tasses par jour.", "r"],
+      ["indigestion", "1 tasse après les repas.", "r"],
+      ["peauIrritee", "Compresses d'infusion refroidie sur eczéma ou peau irritée ; bain de siège.", "r"],
+      ["gencives", "Bain de bouche avec l'infusion.", "r"]
+    ],
+    prec: ["Allergie possible chez les personnes allergiques aux Astéracées (ambroisie, arnica, chrysanthème).", "Ne pas appliquer près des yeux (conjonctivite allergique)."],
+    src: ["L", "D"] },
+
+  { id: "souci", fr: "Souci (calendula)", lat: "Calendula officinalis (et C. arvensis sauvage)", fam: "Astéracées", ar: "أقحوان / آذريون", dj: "—", verif: true, dispo: ["S", "C", "P"],
+    parties: "Fleurs",
+    resume: "Le souci des champs pousse spontanément en Tunisie. La plante de la cicatrisation de la peau.",
+    u: [
+      ["plaies", "Infusion forte de fleurs (2 c. à soupe pour 250 ml), refroidie, en compresses ; ou pommade au calendula (pharmacie).", "r"],
+      ["brulures", "Pommade ou huile de calendula sur brûlures légères refroidies.", "r"],
+      ["peauIrritee", "Même usage (eczéma, érythème fessier).", "r"],
+      ["gorge", "Gargarisme avec l'infusion.", "r"]
+    ],
+    prec: ["Allergie possible aux Astéracées.", "Plaies profondes ou infectées : consulter."],
+    src: ["L", "D"] },
+
+  { id: "pyrethre", fr: "Pyrèthre d'Afrique", lat: "Anacyclus pyrethrum", fam: "Astéracées", ar: "عاقر قرحا", dj: "Âqer qarha", dispo: ["S", "H"],
+    parties: "Racine",
+    resume: "Plante d'Afrique du Nord vendue chez les herboristes. Sa racine mâchée provoque un picotement anesthésiant : remède traditionnel des maux de dents.",
+    u: [
+      ["dents", "Mâcher un petit morceau de racine du côté douloureux (sans avaler), ou bain de bouche avec une décoction légère.", "t"],
+      ["gencives", "Bain de bouche avec la décoction refroidie.", "t"]
+    ],
+    prec: ["Usage local uniquement, ne pas avaler : à fortes doses, irritation digestive grave.", "Pas chez l'enfant ni la femme enceinte."],
+    src: ["L", "D"] },
+
+  // ===================== Vendues chez l'herboriste / en pharmacie
+  { id: "reglisse", fr: "Réglisse", lat: "Glycyrrhiza glabra", fam: "Fabacées", ar: "عرق السوس", dj: "Ârq souss", dispo: ["S", "M", "H"],
+    parties: "Racine",
+    resume: "Racine sucrée, adoucissante pour la gorge et protectrice de l'estomac. Attention à la tension !",
+    u: [
+      ["toux", "Décoction : 1 c. à café de racine coupée (≈ 2 g) dans une tasse d'eau, bouillir 10 min ; 2 tasses par jour, 1 semaine maximum.", "r"],
+      ["gorge", "Mâcher un bâton de réglisse ; même décoction.", "r"],
+      ["acidite", "Même décoction (protège la muqueuse de l'estomac), en cure courte.", "r"]
+    ],
+    prec: ["Contre-indiquée en cas d'hypertension, de maladie du cœur, des reins ou du foie, de diabète, de potassium bas, et pendant la grossesse.", "Pas plus de 4–6 semaines même à faible dose : risque d'hypertension et d'œdèmes.", "Interactions : diurétiques, corticoïdes, digitaliques."],
+    src: ["L", "D"] },
+
+  { id: "sene", fr: "Séné", lat: "Senna alexandrina (syn. Cassia senna)", fam: "Fabacées", ar: "سنا مكي", dj: "Sana mekki", dispo: ["H", "P"],
+    parties: "Feuilles, gousses",
+    resume: "Laxatif puissant vendu par les herboristes. Efficace mais réservé à un usage ponctuel.",
+    u: [
+      ["constipation", "Ponctuellement : ½ à 1 c. à café de feuilles (ou 3–6 gousses) infusées 10 min dans une tasse d'eau, le soir ; effet en 8–12 h. Pas plus de 1 à 2 semaines.", "r"]
+    ],
+    prec: ["Jamais chez l'enfant de moins de 12 ans, pendant la grossesse ou l'allaitement.", "Contre-indiqué en cas de douleur abdominale inexpliquée, d'occlusion, de maladie inflammatoire de l'intestin.", "Usage prolongé : dépendance, perte de potassium (dangereuse avec certains médicaments du cœur).", "Essayer d'abord les fibres (psyllium, lin, figues) et l'eau."],
+    src: ["L", "D"] },
+
+  { id: "karkade", fr: "Hibiscus (karkadé)", lat: "Hibiscus sabdariffa", fam: "Malvacées", ar: "كركديه", dj: "Karkadé", dispo: ["M", "H"],
+    parties: "Calices (fleurs séchées rouges)",
+    resume: "Boisson rouge acidulée, chaude ou froide. Étudiée pour son léger effet sur la tension.",
+    u: [
+      ["tension", "Infusion : 1 c. à soupe de calices par tasse, 10 min, 2 tasses par jour — en complément, et en surveillant sa tension avec son médecin.", "t"],
+      ["fievre", "Boisson fraîche désaltérante et légèrement diurétique.", "t"],
+      ["constipation", "Effet laxatif doux en infusion.", "t"]
+    ],
+    prec: ["Peut renforcer l'effet des antihypertenseurs.", "Peut diminuer l'efficacité de la chloroquine.", "Déconseillé à fortes doses pendant la grossesse."],
+    src: ["D"] },
+
+  { id: "theVert", fr: "Thé vert", lat: "Camellia sinensis", fam: "Théacées", ar: "تاي أخضر", dj: "Tay akhdhar", dispo: ["M"],
+    parties: "Feuilles",
+    resume: "Le thé est un pilier de la vie tunisienne. Le thé vert peu infusé est antioxydant ; le thé très cuit est surtout un excitant.",
+    u: [
+      ["fatigue", "1 tasse de thé vert infusé 2–3 min (pas bouilli), le matin ou en début d'après-midi.", "t"],
+      ["diarrhee", "Thé léger (tanins astringents), avec beaucoup d'eau.", "t"],
+      ["gencives", "Bain de bouche au thé tiède.", "t"]
+    ],
+    prec: ["Excitant (caféine) : à éviter le soir, en cas d'anxiété, de palpitations ou d'insomnie.", "Pris aux repas, diminue l'absorption du fer : le boire à distance si vous êtes anémié(e).", "Le thé « cuit » longtemps est très riche en tanins et caféine. Pas de compléments concentrés de thé vert (atteintes du foie rapportées)."],
+    src: ["L"] },
+
+  { id: "lin", fr: "Lin (graines)", lat: "Linum usitatissimum", fam: "Linacées", ar: "زريعة الكتان", dj: "Zriîet el kettan", dispo: ["C", "M", "H"],
+    parties: "Graines",
+    resume: "Graines riches en mucilages et oméga-3 : laxatif doux et adoucissant.",
+    u: [
+      ["constipation", "1 c. à soupe de graines (entières ou fraîchement moulues) trempées dans un grand verre d'eau, 2–3 fois par jour, avec beaucoup d'eau.", "r"],
+      ["acidite", "Macérat : 1 c. à soupe de graines dans 150 ml d'eau froide 30 min, boire le liquide gélatineux (protège l'estomac).", "r"],
+      ["peauIrritee", "Cataplasme chaud de graines moulues sur furoncle ou peau irritée.", "r"],
+      ["cholesterol", "Graines moulues dans l'alimentation (effet modeste).", "r"]
+    ],
+    prec: ["Toujours avec beaucoup d'eau ; contre-indiqué en cas d'occlusion intestinale.", "Prendre les médicaments à 1 h d'intervalle.", "Graines moulues : à conserver au frais (rancissement)."],
+    src: ["L", "D"] },
+
+  { id: "myrrhe", fr: "Myrrhe", lat: "Commiphora molmol / C. myrrha", fam: "Burséracées", ar: "مر", dj: "Morr", dispo: ["H", "P"],
+    parties: "Gomme-résine",
+    resume: "Résine vendue chez les attarine. Remède reconnu des aphtes et des inflammations de la bouche.",
+    u: [
+      ["gencives", "Teinture de myrrhe (pharmacie) : quelques gouttes dans un verre d'eau en bain de bouche 2–3 fois par jour, ou tamponner l'aphte avec la teinture diluée.", "r"],
+      ["gorge", "Même dilution en gargarisme.", "r"],
+      ["plaies", "Petites plaies : lavage avec la teinture diluée.", "t"]
+    ],
+    prec: ["Usage externe (bouche, peau) recommandé ; ne pas avaler à fortes doses (diarrhée, atteinte des reins).", "Pendant la grossesse : à éviter.", "La teinture pure pique : toujours diluer."],
+    src: ["L", "D"] },
+
+  { id: "valeriane", fr: "Valériane", lat: "Valeriana officinalis", fam: "Valérianacées", ar: "ناردين", dj: "—", dispo: ["P"],
+    parties: "Racine",
+    resume: "Vendue en pharmacie (gélules, comprimés). Calmant de référence de l'anxiété et des troubles du sommeil.",
+    u: [
+      ["sommeil", "Selon la notice (souvent 300–600 mg d'extrait 30 min avant le coucher) ; ou infusion de racine : 1 c. à café par tasse, 10 min. Effet après 1–2 semaines.", "r"],
+      ["stress", "En journée, à petites doses, selon la notice.", "r"]
+    ],
+    prec: ["Ne pas associer à l'alcool, aux somnifères ou anxiolytiques sans avis médical.", "Peut diminuer la vigilance : prudence en voiture.", "Pas chez la femme enceinte ni chez l'enfant de moins de 12 ans sans avis médical."],
+    src: ["L", "D"] },
+
+  { id: "passiflore", fr: "Passiflore", lat: "Passiflora incarnata", fam: "Passifloracées", ar: "زهرة الآلام", dj: "—", dispo: ["P"],
+    parties: "Parties aériennes",
+    resume: "Vendue en pharmacie seule ou associée à l'aubépine ou à la valériane. Anxiété légère, endormissement.",
+    u: [
+      ["stress", "Infusion : 1 c. à café par tasse, 10 min, 2–3 tasses par jour ; ou selon la notice des gélules.", "r"],
+      ["sommeil", "1 tasse ou une prise le soir.", "r"]
+    ],
+    prec: ["Pas d'association avec somnifères, anxiolytiques, antidépresseurs ou alcool sans avis médical.", "Déconseillée pendant la grossesse."],
+    src: ["L", "D"] },
+
+  { id: "harpago", fr: "Harpagophytum (griffe du diable)", lat: "Harpagophytum procumbens", fam: "Pédaliacées", ar: "مخلب الشيطان", dj: "—", dispo: ["P"],
+    parties: "Racines secondaires",
+    resume: "Plante africaine vendue en pharmacie, anti-inflammatoire de l'arthrose et des douleurs de dos.",
+    u: [
+      ["articulations", "Gélules ou comprimés selon la notice, en cure de 2–3 mois (effet progressif).", "r"],
+      ["muscles", "Douleurs de dos chroniques : même cure.", "r"]
+    ],
+    prec: ["Contre-indiqué en cas d'ulcère de l'estomac ou du duodénum, et de calculs biliaires.", "Prudence avec les anticoagulants et les traitements du diabète ou de la tension.", "Pas pendant la grossesse."],
+    src: ["L", "D"] },
+
+  { id: "ginkgo", fr: "Ginkgo", lat: "Ginkgo biloba", fam: "Ginkgoacées", ar: "جنكة", dj: "—", dispo: ["P"],
+    parties: "Feuilles (extrait standardisé)",
+    resume: "Extrait vendu en pharmacie pour la circulation, la mémoire et les vertiges.",
+    u: [
+      ["fatigue", "Extrait standardisé selon la notice (troubles légers de mémoire et de concentration du sujet âgé), en cure de quelques semaines.", "r"],
+      ["circulation", "Même extrait (jambes, extrémités froides, acouphènes) — sur avis médical.", "r"]
+    ],
+    prec: ["Fluidifie le sang : interdit avec anticoagulants/antiagrégants sans avis médical, arrêter avant une opération.", "Ne pas utiliser les feuilles brutes ni les graines (toxiques).", "Pas pendant la grossesse."],
+    src: ["L", "D"] },
+
+  { id: "ashwagandha", fr: "Ashwagandha", lat: "Withania somnifera", fam: "Solanacées", ar: "أشواغاندا", dj: "—", dispo: ["P"],
+    parties: "Racine (poudre)",
+    resume: "Plante ayurvédique de plus en plus vendue en Tunisie. L'OMS la propose contre la fatigue et le stress.",
+    u: [
+      ["fatigue", "OMS : 3–6 g de poudre de racine mélangée à autant de miel, avec du lait chaud, 2 fois par jour avant les repas (ou selon la notice des gélules).", "r"],
+      ["stress", "Même usage, en cure de quelques semaines.", "t"]
+    ],
+    prec: ["Fatigue de plus d'une semaine : en chercher la cause avec un médecin avant (OMS).", "Pas avec l'alcool, les sédatifs ou somnifères ; pas pendant la grossesse.", "Prudence en cas de maladie de la thyroïde ou auto-immune ; atteintes du foie rapportées avec des compléments."],
+    src: ["L", "D", "O"] }
+];
+
+// Plantes très présentes en Tunisie mais à NE PAS utiliser en remède maison
+const PLANTES_A_EVITER = [
+  { fr: "Harmel", lat: "Peganum harmala", ar: "حرمل", dj: "Harmel", pourquoi: "Graines très toxiques (alcaloïdes) : intoxications graves, parfois mortelles, et effet abortif. Le Larousse le réserve à un usage médical encadré." },
+  { fr: "Rue", lat: "Ruta graveolens / R. chalepensis", ar: "فيجل", dj: "Fijel", pourquoi: "Toxique et abortive ; provoque des brûlures de la peau au soleil." },
+  { fr: "Laurier-rose", lat: "Nerium oleander", ar: "دفلة", dj: "Defla", pourquoi: "Toutes les parties sont mortelles (toxique pour le cœur), même en petite quantité. Ne pas confondre avec le laurier-sauce." },
+  { fr: "Ricin", lat: "Ricinus communis", ar: "خروع", dj: "Kharwaâ", pourquoi: "Les graines contiennent de la ricine, poison mortel. Seule l'huile de ricin de pharmacie peut s'utiliser, sur avis." },
+  { fr: "Datura", lat: "Datura stramonium", ar: "داتورة", dj: "Datoura", pourquoi: "Plante hallucinogène très toxique (délire, coma). L'OMS ne la cite qu'en usage externe très encadré." },
+  { fr: "Coloquinte", lat: "Citrullus colocynthis", ar: "حنظل", dj: "Handhal", pourquoi: "Purgatif violent : diarrhées sanglantes et déshydratation graves." },
+  { fr: "Huiles essentielles pures", lat: "—", ar: "زيوت أساسية", dj: "—", pourquoi: "Très concentrées : jamais avalées, jamais pures sur la peau, jamais chez le bébé, l'enfant ou la femme enceinte sans avis d'un professionnel." }
+];
+
+const SOURCES = {
+  L: { court: "Larousse", long: "Larousse des plantes médicinales — Identification, préparation, soins (A. Chevallier, éd. Larousse)" },
+  D: { court: "Duke", long: "James A. Duke, Handbook of Medicinal Herbs, 2e éd., CRC Press" },
+  O: { court: "OMS", long: "OMS (Bureau Asie du Sud-Est), Traditional Herbal Remedies for Primary Health Care, 2010" }
+};
+
+</script>
+<script>
+{
+const DISPO = { S: "Sauvage en Tunisie", C: "Cultivée en Tunisie", M: "Souk / épicerie", H: "Herboriste (3attar)", P: "Pharmacie" };
+const NIV = { r: "Usage reconnu", t: "Usage traditionnel" };
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const norm = s => s.toLowerCase().normalize("NFD").replace(/[̀-ًͯ-ْ]/g, "").replace(/[إأآ]/g, "ا").replace(/ة/g, "ه").replace(/[’'`]/g, " ");
+const STOP = new Set(["de", "la", "le", "les", "du", "des", "au", "aux", "et", "en", "un", "une", "d", "l", "j", "ai", "a", "qui", "me", "mon", "ma", "mes", "je"]);
+const toks = s => norm(s).split(/[^a-z0-9؀-ۿ]+/).filter(t => t && !STOP.has(t));
+const catOf = id => CATEGORIES.find(c => c.id === id);
+const byId = Object.fromEntries(PLANTES.map(p => [p.id, p]));
+
+// index : mal -> remèdes
+const REM = {};
+const isRef = s => /(^|\s)m[êe]mes?\s/i.test(s);
+PLANTES.forEach(p => p.u.forEach(([m, prep, niv], i) => { let base = null; if (isRef(prep)) for (let j = i - 1; j >= 0; j--) if (!isRef(p.u[j][1])) { base = p.u[j][1]; break; } (REM[m] ||= []).push({ p, prep, niv, base }); }));
+Object.values(REM).forEach(l => l.sort((a, b) => (a.niv === b.niv ? a.p.fr.localeCompare(b.p.fr) : a.niv === "r" ? -1 : 1)));
+
+// frise de bocaux
+const JARS = ["romarin", "thym", "nigelle", "fenugrec", "camomille", "sauge", "carvi", "verveine", "fenouil", "menthe", "curcuma", "girofle", "olivier", "myrte"];
+$("#jars").innerHTML = JARS.map((id, i) => { const x = 60 + i * 84; const fills = ["#6f8f4e", "#a7b86a", "#2b2b2b", "#d9a441", "#f3e3a1", "#9fb3a0", "#7a5a3a", "#b9cf8a", "#c9c48f", "#5b9a62", "#e0a019", "#5a2f22", "#8a9a5b", "#3f5c3a"];
+  return `<g transform="translate(${x} 136)"><rect x="-34" y="${-60 - (i % 3) * 12}" width="68" height="${54 + (i % 3) * 12}" rx="12" fill="${fills[i]}" fill-opacity=".85"/><use href="#jar"/><text x="0" y="-50" text-anchor="middle" font-size="11" font-family="IBM Plex Sans Arabic" fill="#1f4a33">${esc(byId[id].dj.split(" /")[0])}</text></g>`; }).join("");
+
+// catégories + exemples
+$("#cats").innerHTML = CATEGORIES.map(c => `<div class="cat"><h3>${esc(c.nom)}</h3><div class="chips">${Object.entries(MAUX).filter(([, m]) => m.cat === c.id).map(([k, m]) => `<button class="chip" data-mal="${k}" aria-pressed="false">${esc(m.nom)}</button>`).join("")}</div></div>`).join("");
+const EX = ["J'ai le ventre gonflé après les repas", "Toux et mal de gorge", "Je n'arrive pas à dormir", "عندي صداع", "Mal de dents"];
+$("#ex").innerHTML += EX.map(e => `<button class="chip" data-ex="${esc(e)}">${esc(e)}</button>`).join("");
+
+function detect(text) {
+  const qt = toks(text); if (!qt.length) return { maux: [], plantes: [] };
+  const hit = t => qt.some(q => t.length <= 3 ? q === t : q.startsWith(t));
+  const found = [];
+  for (const [k, m] of Object.entries(MAUX)) {
+    let score = 0; const used = new Set();
+    for (const kw of [m.nom, ...m.kw]) { const kt = toks(kw); if (kt.length && kt.every(hit)) { score += kt.length; kt.forEach(t => qt.forEach(q => { if (t.length <= 3 ? q === t : q.startsWith(t)) used.add(q); })); } }
+    if (score) found.push([k, score, used]);
+  }
+  found.sort((a, b) => b[1] - a[1]);
+  const taken = new Set(), maux = [];
+  for (const f of found) if ([...f[2]].some(q => !taken.has(q))) { maux.push(f); f[2].forEach(q => taken.add(q)); }
+  const plantes = PLANTES.filter(p => [p.fr, p.dj, p.ar].some(n => { const nt = toks(n.split("/")[0]); return nt.length && nt.every(t => qt.includes(t)); }));
+  return { maux: maux.map(x => x[0]), plantes };
+}
+
+const keyPrec = p => p.prec.find(x => !/^(Très sûre|Très bien|Bien tolér|Sans danger|Aliment sûr|Sûre)/i.test(x)) || "";
+const dispoBadges = p => p.dispo.map(d => `<span class="b" title="${DISPO[d]}">${DISPO[d]}</span>`).join("");
+function renderMal(k) {
+  const m = MAUX[k], c = catOf(m.cat), list = REM[k] || [];
+  return `<article class="mal" id="mal-${k}"><header><h3>${esc(m.nom)}</h3><span class="cat-name">${esc(c.nom)} · ${list.length} plante${list.length > 1 ? "s" : ""}</span></header>
+  <p class="alerte"><strong>Quand consulter :</strong> ${esc(m.alerte)}</p>
+  <ul class="remedes">${list.map(({ p, prep, niv, base }) => `<li class="remede"><div class="who"><button data-plante="${p.id}">${esc(p.fr)}</button><span class="sub"><span class="ar">${esc(p.ar)}</span>${p.dj !== "—" ? " · " + esc(p.dj) : ""}</span></div>
+  <div>${base ? `<span class="base">Préparation de base : ${esc(base)}</span>` : ""}<p>${esc(prep)}</p>${keyPrec(p) ? `<p class="prec-mini"><b>Précaution :</b> ${esc(keyPrec(p))}</p>` : ""}<div class="badges"><span class="b ${niv}">${NIV[niv]}</span>${dispoBadges(p)}</div></div></li>`).join("")}</ul></article>`;
+}
+function showResults(keys, plantes, query) {
+  const out = $("#resultats");
+  document.querySelectorAll("[data-mal]").forEach(b => b.setAttribute("aria-pressed", keys.includes(b.dataset.mal)));
+  if (!keys.length && !plantes.length) {
+    out.innerHTML = `<div class="wrap"><div class="vide">Je n'ai pas reconnu de mal dans « ${esc(query)} ». Essayez avec d'autres mots (toux, ventre, sommeil, règles…) ou choisissez dans la liste ci-dessus. En cas de symptôme inquiétant, appelez le 190.</div></div>`;
+  } else {
+    out.innerHTML = `<div class="wrap"><div class="res-head"><h2>${keys.length ? "Remèdes pour : " + keys.map(k => esc(MAUX[k].nom.toLowerCase())).join(", ") : "Plantes trouvées"}</h2><p>Classés de l'usage le mieux étudié au plus traditionnel.</p></div>
+    ${plantes.length ? `<p>Plante${plantes.length > 1 ? "s" : ""} mentionnée${plantes.length > 1 ? "s" : ""} : ${plantes.map(p => `<button class="filt" data-plante="${p.id}">${esc(p.fr)}</button>`).join(" ")}</p>` : ""}
+    ${keys.map(renderMal).join("")}</div>`;
+  }
+  out.scrollIntoView({ block: "start" });
+}
+
+$("#f").addEventListener("submit", e => { e.preventDefault(); const q = $("#q").value.trim(); if (!q) return; const r = detect(q); showResults(r.maux, r.plantes, q); try { localStorage.setItem("rm-q", q); } catch (_) {} });
+$("#q").addEventListener("keydown", e => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); $("#f").requestSubmit(); } });
+
+// étagère
+let filt = null;
+$("#filters").innerHTML = Object.entries(DISPO).map(([k, v]) => `<button class="filt" data-f="${k}" aria-pressed="false">${v}</button>`).join("");
+function renderGrid() {
+  const q = toks($("#pq").value);
+  const list = PLANTES.filter(p => (!filt || p.dispo.includes(filt)) && (!q.length || q.every(t => toks([p.fr, p.lat, p.ar, p.dj].join(" ")).some(w => w.startsWith(t)))));
+  $("#count").textContent = `${list.length} plante${list.length > 1 ? "s" : ""} sur ${PLANTES.length}, présentes ou vendues en Tunisie.`;
+  $("#grid").innerHTML = list.map(p => `<button class="jar" data-plante="${p.id}"><span class="fr">${esc(p.fr)}</span><span class="ar">${esc(p.ar)}</span><span class="lat">${esc(p.lat)}</span><span class="n">${p.dj !== "—" ? esc(p.dj) + " · " : ""}${p.u.length} usage${p.u.length > 1 ? "s" : ""}</span></button>`).join("") || `<div class="vide">Aucune plante ne correspond.</div>`;
+}
+$("#pq").addEventListener("input", renderGrid);
+$("#filters").addEventListener("click", e => { const b = e.target.closest("[data-f]"); if (!b) return; filt = filt === b.dataset.f ? null : b.dataset.f; document.querySelectorAll("[data-f]").forEach(x => x.setAttribute("aria-pressed", x.dataset.f === filt)); renderGrid(); });
+
+// fiche plante
+const dlg = $("#fiche");
+function openPlante(id) {
+  const p = byId[id]; if (!p) return;
+  dlg.innerHTML = `<div class="f-head"><button class="f-close" aria-label="Fermer">×</button><h2 id="f-title">${esc(p.fr)}</h2><div class="ar">${esc(p.ar)}</div><div>${p.dj !== "—" ? esc(p.dj) : ""}${p.verif ? ' <span class="verif" style="color:var(--saffron)">(nom local à confirmer)</span>' : ""}</div><div class="lat">${esc(p.lat)} — ${esc(p.fam)}</div></div>
+  <div class="f-body"><p>${esc(p.resume)}</p><div class="badges">${dispoBadges(p)}</div>
+  <h3>Partie utilisée</h3><p>${esc(p.parties)}</p>
+  <h3>Usages et préparations</h3>${p.u.map(([m, prep, niv]) => `<div class="usage"><span class="m">${esc(MAUX[m].nom)}</span> <span class="b ${niv}">${NIV[niv]}</span><p style="margin:4px 0 0">${esc(prep)}</p></div>`).join("")}
+  <h3>Précautions</h3><ul class="precs">${p.prec.map(x => `<li>${esc(x)}</li>`).join("")}</ul>
+  <p class="count" style="margin-top:16px">Sources : ${p.src.map(s => SOURCES[s].court).join(", ")}</p></div>`;
+  dlg.showModal(); dlg.querySelector(".f-close").focus();
+  if (location.hash !== "#plante-" + id) history.replaceState(null, "", "#plante-" + id);
+}
+dlg.addEventListener("click", e => { if (e.target === dlg || e.target.closest(".f-close")) dlg.close(); });
+dlg.addEventListener("close", () => { if (location.hash.startsWith("#plante-")) history.replaceState(null, "", "#plantes"); });
+
+document.addEventListener("click", e => {
+  const pl = e.target.closest("[data-plante]"); if (pl) { openPlante(pl.dataset.plante); return; }
+  const ml = e.target.closest("[data-mal]"); if (ml) { $("#q").value = MAUX[ml.dataset.mal].nom; showResults([ml.dataset.mal], [], ""); history.replaceState(null, "", "#mal-" + ml.dataset.mal); return; }
+  const ex = e.target.closest("[data-ex]"); if (ex) { $("#q").value = ex.dataset.ex; $("#f").requestSubmit(); }
+});
+
+// à éviter, légende, sources
+$("#avoid").innerHTML = PLANTES_A_EVITER.map(a => `<div><b>${esc(a.fr)}</b> <span class="ar">${esc(a.ar)}</span> <i class="count">${esc(a.lat)}</i><p>${esc(a.pourquoi)}</p></div>`).join("");
+$("#legend").innerHTML = Object.values(DISPO).map(v => `<span class="b">${v}</span>`).join("") + `<span class="b r">${NIV.r}</span><span class="b t">${NIV.t}</span>`;
+$("#sources").textContent = Object.values(SOURCES).map(s => s.long).join(" · ");
+
+renderGrid();
+function route() {
+  const h = location.hash.slice(1);
+  if (h.startsWith("plante-")) openPlante(h.slice(7));
+  else if (h.startsWith("mal-") && MAUX[h.slice(4)]) showResults([h.slice(4)], [], "");
+}
+window.addEventListener("hashchange", route); route();
+try { const last = localStorage.getItem("rm-q"); if (last && !$("#q").value) $("#q").placeholder = "Dernière recherche : " + last; } catch (_) {}
+}
+</script>
+</body>
+</html>
